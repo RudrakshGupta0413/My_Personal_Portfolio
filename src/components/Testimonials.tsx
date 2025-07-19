@@ -1,7 +1,11 @@
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 const Testimonials = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const testimonials = [
     {
       name: "Sarah Johnson",
@@ -27,48 +31,82 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-16 px-6 bg-surface-dark/50">
+    <section id="testimonials" className="py-16 px-6 bg-surface-dark/50" ref={ref}>
       <div className="container mx-auto">
-        <div className="text-center mb-12">
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
           <h2 className="text-3xl lg:text-4xl font-bold gradient-text mb-4">
             Client Testimonials
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             What my clients say about working with me
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {testimonials.map((testimonial, index) => (
-            <Card 
+            <motion.div
               key={testimonial.name}
-              className={`p-6 glass-effect hover:glow-accent transition-all duration-500 fade-in-up stagger-${index + 1} border-border/50`}
+              initial={{ opacity: 0, y: 50, rotateY: -15 }}
+              animate={isInView ? { opacity: 1, y: 0, rotateY: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              whileHover={{ y: -10, rotateY: 5 }}
+              style={{ transformStyle: "preserve-3d" }}
             >
-              <div className="flex items-center mb-4">
-                <Quote className="h-8 w-8 text-accent/50 mr-2" />
-                <div className="flex">
-                  {Array.from({ length: testimonial.rating }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-accent text-accent" />
-                  ))}
-                </div>
-              </div>
-              
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                "{testimonial.content}"
-              </p>
-              
-              <div className="flex items-center">
-                <img 
-                  src={testimonial.avatar} 
-                  alt={testimonial.name}
-                  className="w-10 h-10 rounded-full mr-3 object-cover"
-                />
-                <div>
-                  <h4 className="font-semibold text-sm">{testimonial.name}</h4>
-                  <p className="text-muted-foreground text-xs">{testimonial.role}</p>
-                </div>
-              </div>
-            </Card>
+              <Card className="p-6 glass-effect hover:glow-accent transition-all duration-500 border-border/50 h-full group">
+                <motion.div 
+                  className="flex items-center mb-4"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <motion.div
+                    animate={{ rotate: [0, 5, 0] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  >
+                    <Quote className="h-8 w-8 text-accent/50 mr-2" />
+                  </motion.div>
+                  <div className="flex">
+                    {Array.from({ length: testimonial.rating }).map((_, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ scale: 0 }}
+                        animate={isInView ? { scale: 1 } : {}}
+                        transition={{ delay: index * 0.2 + i * 0.1 }}
+                        whileHover={{ scale: 1.2, rotate: 10 }}
+                      >
+                        <Star className="h-4 w-4 fill-accent text-accent" />
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+                
+                <motion.p 
+                  className="text-muted-foreground mb-6 leading-relaxed group-hover:text-foreground transition-colors"
+                  whileHover={{ x: 5 }}
+                >
+                  "{testimonial.content}"
+                </motion.p>
+                
+                <motion.div 
+                  className="flex items-center"
+                  whileHover={{ x: 10 }}
+                >
+                  <motion.img 
+                    src={testimonial.avatar} 
+                    alt={testimonial.name}
+                    className="w-10 h-10 rounded-full mr-3 object-cover border-2 border-accent/20"
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                  />
+                  <div>
+                    <h4 className="font-semibold text-sm">{testimonial.name}</h4>
+                    <p className="text-muted-foreground text-xs">{testimonial.role}</p>
+                  </div>
+                </motion.div>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
