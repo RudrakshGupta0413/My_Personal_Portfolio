@@ -47,8 +47,9 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-20 px-6 relative overflow-hidden" ref={ref}>
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Enhanced animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Floating geometric shapes */}
         <motion.div 
           className="absolute top-20 left-10 w-2 h-2 bg-neon-cyan rounded-full opacity-60"
           animate={{ 
@@ -76,6 +77,50 @@ const Skills = () => {
           }}
           transition={{ duration: 5, repeat: Infinity, delay: 2 }}
         />
+        
+        {/* Large flowing orbs */}
+        <motion.div
+          className="absolute top-1/4 right-10 w-32 h-32 bg-gradient-neon opacity-5 rounded-full blur-2xl"
+          animate={{
+            scale: [1, 1.4, 1],
+            x: [0, -20, 0],
+            y: [0, 15, 0],
+            rotate: [0, 180, 360]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 left-20 w-24 h-24 bg-neon-pink opacity-8 rounded-full blur-xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            x: [0, 25, 0],
+            y: [0, -10, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        
+        {/* Grid pattern with movement */}
+        <motion.div 
+          className="absolute inset-0 opacity-10"
+          animate={{
+            backgroundPosition: ["0px 0px", "60px 60px", "0px 0px"]
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+        </motion.div>
       </div>
 
       <div className="container mx-auto relative z-10">

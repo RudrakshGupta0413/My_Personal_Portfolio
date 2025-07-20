@@ -1,129 +1,372 @@
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { Mail, Phone, MapPin, Send, MessageSquare, User, Building, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 const Contact = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    setIsSubmitting(false);
+  };
+
+  const contactInfo = [
+    {
+      icon: Mail,
+      title: "Email",
+      value: "john@developer.com",
+      description: "Drop me a line anytime",
+      color: "from-blue-400 to-blue-600"
+    },
+    {
+      icon: Phone,
+      title: "Phone",
+      value: "+1 (555) 123-4567",
+      description: "Mon-Fri from 8am to 6pm",
+      color: "from-green-400 to-green-600"
+    },
+    {
+      icon: MapPin,
+      title: "Location",
+      value: "Available Worldwide",
+      description: "Remote & on-site projects",
+      color: "from-purple-400 to-purple-600"
+    },
+    {
+      icon: Clock,
+      title: "Response Time",
+      value: "Within 24 hours",
+      description: "Quick turnaround guaranteed",
+      color: "from-orange-400 to-orange-600"
+    }
+  ];
+
+  const services = [
+    { icon: "🚀", text: "Full-stack web development" },
+    { icon: "📱", text: "Mobile app development" },
+    { icon: "💡", text: "Technical consulting" },
+    { icon: "🔧", text: "Code reviews & optimization" },
+    { icon: "☁️", text: "Cloud deployment & DevOps" },
+    { icon: "🎨", text: "UI/UX design collaboration" }
+  ];
+
   return (
-    <section id="contact" className="py-20 px-6">
-      <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold gradient-text mb-4">
-            Let's Work Together
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Ready to start your next project? Let's discuss how I can help bring your ideas to life.
-          </p>
+    <section id="contact" className="py-20 px-6 relative overflow-hidden" ref={ref}>
+      {/* Animated Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Floating geometric shapes */}
+        <motion.div
+          className="absolute top-20 left-10 w-40 h-40 bg-gradient-neon opacity-10 rounded-full blur-2xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, 30, 0],
+            y: [0, -20, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-32 right-20 w-32 h-32 bg-neon-pink opacity-15 rounded-full blur-xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            x: [0, -40, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute top-1/2 right-10 w-24 h-24 bg-neon-cyan opacity-20 rounded-full blur-lg"
+          animate={{
+            scale: [1, 1.5, 1],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 30,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
         </div>
+      </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div className="fade-in-up">
-              <h3 className="text-2xl font-semibold mb-6">Get In Touch</h3>
-              <p className="text-muted-foreground mb-8 leading-relaxed">
-                I'm always excited to work on new projects and help businesses achieve their goals. 
-                Whether you need a complete web application or want to enhance your existing platform, 
-                I'm here to help.
-              </p>
+      <div className="container mx-auto relative z-10">
+        {/* Header Section */}
+        <motion.div 
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-effect border border-border/30 mb-6"
+            whileHover={{ scale: 1.05 }}
+          >
+            <MessageSquare className="h-4 w-4 text-accent" />
+            <span className="text-sm text-muted-foreground">Let's Connect</span>
+          </motion.div>
+          
+          <motion.h2 
+            className="text-5xl lg:text-6xl font-bold gradient-text mb-6"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Start Your Project
+          </motion.h2>
+          
+          <motion.p 
+            className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            Ready to transform your ideas into reality? Let's discuss how we can create something amazing together.
+          </motion.p>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-16 max-w-7xl mx-auto">
+          {/* Contact Info Side */}
+          <motion.div 
+            className="space-y-8"
+            initial={{ opacity: 0, x: -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            {/* Contact Info Cards */}
+            <div className="grid sm:grid-cols-2 gap-6">
+              {contactInfo.map((info, index) => (
+                <motion.div
+                  key={info.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
+                  whileHover={{ 
+                    scale: 1.05,
+                    transition: { duration: 0.2 }
+                  }}
+                >
+                  <Card className="p-6 glass-effect border-border/30 hover:border-accent/30 transition-all duration-300 h-full group cursor-pointer">
+                    <motion.div 
+                      className="flex flex-col items-start space-y-3"
+                      whileHover={{ x: 5 }}
+                    >
+                      <motion.div 
+                        className={`p-3 bg-gradient-to-r ${info.color} rounded-xl opacity-90 group-hover:opacity-100 transition-opacity`}
+                        whileHover={{ rotate: 15, scale: 1.1 }}
+                      >
+                        <info.icon className="h-5 w-5 text-white" />
+                      </motion.div>
+                      <div>
+                        <h4 className="font-semibold text-foreground group-hover:text-accent transition-colors">
+                          {info.title}
+                        </h4>
+                        <p className="text-sm font-medium text-muted-foreground">{info.value}</p>
+                        <p className="text-xs text-muted-foreground/70 mt-1">{info.description}</p>
+                      </div>
+                    </motion.div>
+                  </Card>
+                </motion.div>
+              ))}
             </div>
 
-            <div className="space-y-6">
-              <Card className="p-4 glass-effect border-border/50 fade-in-up stagger-1">
-                <div className="flex items-center">
-                  <div className="p-3 bg-gradient-neon/10 rounded-lg mr-4">
-                    <Mail className="h-5 w-5 text-accent" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Email</h4>
-                    <p className="text-muted-foreground">john@developer.com</p>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-4 glass-effect border-border/50 fade-in-up stagger-2">
-                <div className="flex items-center">
-                  <div className="p-3 bg-gradient-neon/10 rounded-lg mr-4">
-                    <Phone className="h-5 w-5 text-accent" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Phone</h4>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-4 glass-effect border-border/50 fade-in-up stagger-3">
-                <div className="flex items-center">
-                  <div className="p-3 bg-gradient-neon/10 rounded-lg mr-4">
-                    <MapPin className="h-5 w-5 text-accent" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">Location</h4>
-                    <p className="text-muted-foreground">Available Worldwide</p>
-                  </div>
-                </div>
-              </Card>
-            </div>
-
-            <div className="fade-in-up stagger-4">
-              <h4 className="font-semibold mb-4">Available for:</h4>
-              <ul className="space-y-2 text-muted-foreground">
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-accent rounded-full mr-3"></div>
-                  Full-stack web development
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-accent rounded-full mr-3"></div>
-                  Mobile app development
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-accent rounded-full mr-3"></div>
-                  Technical consulting
-                </li>
-                <li className="flex items-center">
-                  <div className="w-2 h-2 bg-accent rounded-full mr-3"></div>
-                  Code reviews & optimization
-                </li>
-              </ul>
-            </div>
-          </div>
+            {/* Services Available */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 1.2 }}
+            >
+              <h4 className="font-bold text-xl mb-6 flex items-center gap-2">
+                <Building className="h-5 w-5 text-accent" />
+                Services Available
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {services.map((service, index) => (
+                  <motion.div
+                    key={service.text}
+                    className="flex items-center gap-3 p-3 rounded-lg glass-effect border border-border/30 hover:border-accent/30 transition-all duration-300 group cursor-pointer"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 1.4 + index * 0.1 }}
+                    whileHover={{ 
+                      scale: 1.02,
+                      x: 5,
+                      transition: { duration: 0.2 }
+                    }}
+                  >
+                    <motion.span 
+                      className="text-xl"
+                      whileHover={{ scale: 1.2, rotate: 10 }}
+                    >
+                      {service.icon}
+                    </motion.span>
+                    <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
+                      {service.text}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
 
           {/* Contact Form */}
-          <Card className="p-8 glass-effect border-border/50 fade-in-up stagger-2">
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium mb-2 block">Name</label>
-                  <Input placeholder="Your name" className="glass-effect border-border/50" />
-                </div>
-                <div>
-                  <label className="text-sm font-medium mb-2 block">Email</label>
-                  <Input type="email" placeholder="your@email.com" className="glass-effect border-border/50" />
-                </div>
-              </div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <Card className="p-8 glass-effect border-border/30 hover:border-accent/20 transition-all duration-500 relative overflow-hidden">
+              {/* Form background animation */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-primary/5 opacity-0 hover:opacity-100 transition-opacity duration-500"
+                animate={{
+                  background: [
+                    "linear-gradient(45deg, hsl(var(--accent)/0.05), transparent, hsl(var(--primary)/0.05))",
+                    "linear-gradient(135deg, hsl(var(--primary)/0.05), transparent, hsl(var(--accent)/0.05))",
+                    "linear-gradient(45deg, hsl(var(--accent)/0.05), transparent, hsl(var(--primary)/0.05))"
+                  ]
+                }}
+                transition={{ duration: 10, repeat: Infinity }}
+              />
               
-              <div>
-                <label className="text-sm font-medium mb-2 block">Subject</label>
-                <Input placeholder="Project inquiry" className="glass-effect border-border/50" />
+              <div className="relative z-10">
+                <motion.div 
+                  className="mb-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 1 }}
+                >
+                  <h3 className="text-2xl font-bold mb-2 flex items-center gap-2">
+                    <User className="h-5 w-5 text-accent" />
+                    Send a Message
+                  </h3>
+                  <p className="text-muted-foreground">I'll get back to you within 24 hours</p>
+                </motion.div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <motion.div 
+                    className="grid md:grid-cols-2 gap-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 1.2 }}
+                  >
+                    <motion.div whileHover={{ scale: 1.02 }} whileFocus={{ scale: 1.02 }}>
+                      <label className="text-sm font-medium mb-2 block text-foreground">Name *</label>
+                      <Input 
+                        placeholder="Your full name" 
+                        className="glass-effect border-border/50 hover:border-accent/50 focus:border-accent transition-all duration-300"
+                        required
+                      />
+                    </motion.div>
+                    <motion.div whileHover={{ scale: 1.02 }} whileFocus={{ scale: 1.02 }}>
+                      <label className="text-sm font-medium mb-2 block text-foreground">Email *</label>
+                      <Input 
+                        type="email" 
+                        placeholder="your@email.com" 
+                        className="glass-effect border-border/50 hover:border-accent/50 focus:border-accent transition-all duration-300"
+                        required
+                      />
+                    </motion.div>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 1.4 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileFocus={{ scale: 1.02 }}
+                  >
+                    <label className="text-sm font-medium mb-2 block text-foreground">Subject *</label>
+                    <Input 
+                      placeholder="Project inquiry, consultation, etc." 
+                      className="glass-effect border-border/50 hover:border-accent/50 focus:border-accent transition-all duration-300"
+                      required
+                    />
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 1.6 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileFocus={{ scale: 1.02 }}
+                  >
+                    <label className="text-sm font-medium mb-2 block text-foreground">Message *</label>
+                    <Textarea 
+                      placeholder="Tell me about your project, timeline, budget, and any specific requirements..." 
+                      rows={6}
+                      className="glass-effect border-border/50 hover:border-accent/50 focus:border-accent transition-all duration-300 resize-none"
+                      required
+                    />
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 1.8 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Button 
+                      type="submit"
+                      className="w-full bg-gradient-neon hover:bg-gradient-primary text-background font-semibold py-3 relative overflow-hidden group"
+                      disabled={isSubmitting}
+                    >
+                      {/* Button animation overlay */}
+                      <motion.div
+                        className="absolute inset-0 bg-white/20"
+                        initial={{ x: "-100%" }}
+                        whileHover={{ x: "100%" }}
+                        transition={{ duration: 0.5 }}
+                      />
+                      
+                      <span className="relative z-10 flex items-center justify-center gap-2">
+                        {isSubmitting ? (
+                          <>
+                            <motion.div
+                              className="w-4 h-4 border-2 border-background border-t-transparent rounded-full"
+                              animate={{ rotate: 360 }}
+                              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                            />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            Send Message
+                            <motion.div
+                              whileHover={{ x: 5 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <Send className="h-4 w-4" />
+                            </motion.div>
+                          </>
+                        )}
+                      </span>
+                    </Button>
+                  </motion.div>
+                </form>
               </div>
-              
-              <div>
-                <label className="text-sm font-medium mb-2 block">Message</label>
-                <Textarea 
-                  placeholder="Tell me about your project..." 
-                  rows={6}
-                  className="glass-effect border-border/50"
-                />
-              </div>
-              
-              <Button className="w-full glow-effect hover:glow-accent transition-all duration-300">
-                Send Message
-                <Send className="ml-2 h-4 w-4" />
-              </Button>
-            </form>
-          </Card>
+            </Card>
+          </motion.div>
         </div>
       </div>
     </section>

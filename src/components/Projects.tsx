@@ -311,9 +311,24 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-20 px-6 relative overflow-hidden" ref={ref}>
-      {/* Animated background grid */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
+      {/* Enhanced animated background */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        {/* Animated grid pattern */}
+        <motion.div 
+          className="absolute inset-0"
+          animate={{
+            backgroundPosition: ["0px 0px", "40px 40px", "0px 0px"]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        >
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
+        </motion.div>
+        
+        {/* Moving accent gradient */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/5 to-transparent"
           animate={{
@@ -323,6 +338,34 @@ const Projects = () => {
               repeat: Infinity,
               ease: "linear"
             }
+          }}
+        />
+        
+        {/* Floating orbs */}
+        <motion.div
+          className="absolute top-20 right-1/4 w-40 h-40 bg-gradient-primary opacity-10 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, -30, 0],
+            y: [0, 20, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-1/3 w-32 h-32 bg-neon-cyan opacity-15 rounded-full blur-2xl"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            x: [0, 40, 0],
+            y: [0, -25, 0],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut"
           }}
         />
       </div>
