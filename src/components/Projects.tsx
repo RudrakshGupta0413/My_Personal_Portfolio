@@ -13,8 +13,9 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   const mouseXSpring = useSpring(x);
   const mouseYSpring = useSpring(y);
   
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7.5deg", "-7.5deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7.5deg", "7.5deg"]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
+  const scale = useTransform(mouseXSpring, [-0.5, 0.5], [0.95, 1.05]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
@@ -40,104 +41,215 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
       style={{
         rotateY: rotateY,
         rotateX: rotateX,
+        scale: scale,
         transformStyle: "preserve-3d",
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      className="group"
+      initial={{ 
+        opacity: 0, 
+        y: 100,
+        rotateX: -30,
+        scale: 0.8
+      }}
+      whileInView={{ 
+        opacity: 1, 
+        y: 0,
+        rotateX: 0,
+        scale: 1
+      }}
+      transition={{ 
+        duration: 0.8, 
+        delay: index * 0.2,
+        type: "spring",
+        stiffness: 80
+      }}
+      viewport={{ once: true, margin: "-50px" }}
+      className="group relative"
     >
-      <Card className="overflow-hidden glass-effect hover:glow-accent transition-all duration-500 border-border/50 h-full">
+      {/* Floating background glow */}
+      <motion.div
+        className="absolute -inset-2 bg-gradient-neon rounded-2xl opacity-0 group-hover:opacity-20 blur-lg"
+        transition={{ duration: 0.5 }}
+      />
+      
+      <Card className="relative overflow-hidden glass-effect border-border/30 h-full backdrop-blur-xl">
         <div className="relative overflow-hidden">
-          <motion.img 
-            src={project.image} 
-            alt={project.title}
-            className="w-full h-48 object-cover"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          />
-          
-          {/* Gradient overlay */}
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent"
-            initial={{ opacity: 0 }}
-            whileHover={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
-          />
-          
-          {/* Floating action buttons */}
-          <motion.div 
-            className="absolute top-4 right-4 flex gap-2"
-            initial={{ opacity: 0, y: -20 }}
-            whileHover={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+          {/* Main project image with parallax effect */}
+          <motion.div
+            className="relative h-56 overflow-hidden"
+            style={{
+              transform: "translateZ(20px)"
+            }}
           >
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button size="sm" variant="secondary" className="h-8 w-8 p-0 backdrop-blur-sm">
-                <ExternalLink className="h-4 w-4" />
-              </Button>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button size="sm" variant="secondary" className="h-8 w-8 p-0 backdrop-blur-sm">
-                <Github className="h-4 w-4" />
-              </Button>
-            </motion.div>
+            <motion.img 
+              src={project.image} 
+              alt={project.title}
+              className="w-full h-full object-cover"
+              style={{
+                scale: scale,
+                transform: "translateZ(10px)"
+              }}
+              whileHover={{ scale: 1.15 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            />
+            
+            {/* Dynamic color overlay based on hover position */}
+            <motion.div 
+              className="absolute inset-0"
+              style={{
+                background: `radial-gradient(circle at ${x.get() * 100 + 50}% ${y.get() * 100 + 50}%, 
+                  hsl(var(--accent) / 0.2) 0%, 
+                  hsl(var(--background) / 0.8) 70%)`
+              }}
+            />
+            
+            {/* Animated border lines */}
+            <motion.div 
+              className="absolute inset-0 border-2 border-transparent"
+              whileHover={{
+                borderColor: "hsl(var(--accent) / 0.5)",
+                borderRadius: "0.5rem"
+              }}
+              transition={{ duration: 0.3 }}
+            />
           </motion.div>
           
-          {/* Shimmer effect */}
+          {/* Floating action panel */}
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            style={{ transform: "translateZ(30px)" }}
+          >
+            <div className="absolute bottom-4 right-4 flex gap-3">
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                whileHover={{ y: 0, opacity: 1, scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ delay: 0.1 }}
+                className="group/btn"
+              >
+                <Button 
+                  size="sm" 
+                  className="h-10 w-10 p-0 glass-effect border border-accent/30 hover:border-accent hover:bg-accent/20 group-hover/btn:shadow-lg group-hover/btn:shadow-accent/25"
+                >
+                  <motion.div
+                    whileHover={{ rotate: 15 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                  </motion.div>
+                </Button>
+              </motion.div>
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                whileHover={{ y: 0, opacity: 1, scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ delay: 0.2 }}
+                className="group/btn"
+              >
+                <Button 
+                  size="sm" 
+                  className="h-10 w-10 p-0 glass-effect border border-accent/30 hover:border-accent hover:bg-accent/20 group-hover/btn:shadow-lg group-hover/btn:shadow-accent/25"
+                >
+                  <motion.div
+                    whileHover={{ rotate: -15 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Github className="h-4 w-4" />
+                  </motion.div>
+                </Button>
+              </motion.div>
+            </div>
+          </motion.div>
+          
+          {/* Animated particle effect */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12"
-            initial={{ x: "-100%" }}
-            whileHover={{ x: "100%" }}
-            transition={{ duration: 0.8 }}
+            className="absolute top-4 left-4 w-2 h-2 bg-accent rounded-full opacity-0 group-hover:opacity-100"
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.5, 1, 0.5]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              delay: index * 0.3
+            }}
           />
         </div>
         
-        <div className="p-6" style={{ transform: "translateZ(25px)" }}>
+        {/* Content section with enhanced animations */}
+        <motion.div 
+          className="p-6 relative"
+          style={{ transform: "translateZ(40px)" }}
+        >
+          {/* Floating title with magnetic effect */}
           <motion.h3 
-            className="text-xl font-semibold mb-2 group-hover:text-accent transition-colors"
-            whileHover={{ x: 5 }}
+            className="text-xl font-bold mb-3 group-hover:text-accent transition-colors duration-300 relative"
+            whileHover={{ 
+              x: mouseXSpring.get() * 10,
+              y: mouseYSpring.get() * 5,
+              transition: { type: "spring", stiffness: 300 }
+            }}
           >
             {project.title}
+            {/* Underline animation */}
+            <motion.div
+              className="absolute -bottom-1 left-0 h-0.5 bg-gradient-neon"
+              initial={{ width: 0 }}
+              whileHover={{ width: "100%" }}
+              transition={{ duration: 0.3 }}
+            />
           </motion.h3>
+          
           <motion.p 
-            className="text-muted-foreground text-sm mb-4 leading-relaxed"
-            whileHover={{ x: 10 }}
+            className="text-muted-foreground text-sm mb-6 leading-relaxed"
+            whileHover={{ 
+              color: "hsl(var(--foreground))",
+              transition: { duration: 0.3 }
+            }}
           >
             {project.description}
           </motion.p>
           
+          {/* Enhanced tech stack with staggered reveal */}
           <motion.div 
             className="flex flex-wrap gap-2"
-            whileHover={{ scale: 1.02 }}
+            initial="hidden"
+            whileInView="visible"
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.1
+                }
+              }
+            }}
           >
             {project.tech.map((tech: string, techIndex: number) => (
               <motion.div
                 key={tech}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: techIndex * 0.1 }}
-                whileHover={{ scale: 1.1, y: -2 }}
+                variants={{
+                  hidden: { opacity: 0, scale: 0, y: 20 },
+                  visible: { opacity: 1, scale: 1, y: 0 }
+                }}
+                whileHover={{ 
+                  scale: 1.15, 
+                  y: -4,
+                  boxShadow: "0 4px 20px hsl(var(--accent) / 0.3)",
+                  transition: { duration: 0.2 }
+                }}
+                whileTap={{ scale: 0.95 }}
               >
                 <Badge 
                   variant="secondary" 
-                  className="text-xs glass-effect border-border/50 hover:bg-accent/20"
+                  className="text-xs glass-effect border-border/50 hover:border-accent/50 hover:bg-accent/10 cursor-pointer"
                 >
                   {tech}
                 </Badge>
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
       </Card>
     </motion.div>
   );
@@ -198,45 +310,109 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20 px-6" ref={ref}>
-      <div className="container mx-auto">
+    <section id="projects" className="py-20 px-6 relative overflow-hidden" ref={ref}>
+      {/* Animated background grid */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/5 to-transparent"
+          animate={{
+            x: ["-100%", "100%"],
+            transition: {
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto relative z-10">
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl lg:text-5xl font-bold gradient-text mb-4">
-            Featured Projects
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A showcase of my recent work, from concept to deployment
-          </p>
+          <motion.h2 
+            className="text-4xl lg:text-6xl font-bold gradient-text mb-6"
+            whileInView={{ 
+              scale: [0.9, 1],
+              opacity: [0, 1]
+            }}
+            transition={{ duration: 0.8 }}
+          >
+            Project Showcase
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            Each project represents a unique challenge solved through innovative thinking, 
+            cutting-edge technology, and meticulous attention to detail
+          </motion.p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
+        {/* Enhanced project grid with masonry-style layout */}
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8 lg:gap-12">
           {projects.map((project, index) => (
-            <ProjectCard key={project.title} project={project} index={index} />
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 100 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.15,
+                type: "spring",
+                stiffness: 100
+              }}
+              className={`${index % 3 === 1 ? 'xl:mt-12' : ''} ${index % 3 === 2 ? 'xl:mt-24' : ''}`}
+            >
+              <ProjectCard project={project} index={index} />
+            </motion.div>
           ))}
         </div>
 
+        {/* Call to action with enhanced animation */}
         <motion.div 
-          className="text-center mt-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          className="text-center mt-20"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.8, delay: 1.2 }}
         >
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            className="inline-block"
           >
-            <Button variant="outline" size="lg" className="glass-effect hover:bg-secondary/20 group">
-              <span className="mr-2">View All Projects</span>
+            <Button 
+              size="lg" 
+              className="glass-effect border border-accent/30 hover:border-accent hover:bg-accent/10 group px-8 py-6 text-lg relative overflow-hidden"
+            >
+              {/* Button background animation */}
               <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
+                className="absolute inset-0 bg-gradient-neon opacity-0 group-hover:opacity-10"
+                initial={{ scale: 0, rotate: 180 }}
+                whileHover={{ scale: 1, rotate: 0 }}
+                transition={{ duration: 0.5 }}
+              />
+              
+              <span className="relative z-10 mr-3">Explore All Projects</span>
+              <motion.div
+                className="relative z-10"
+                animate={{ 
+                  x: [0, 5, 0],
+                  rotate: [0, 15, 0]
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
               >
-                <ExternalLink className="h-4 w-4" />
+                <ExternalLink className="h-5 w-5" />
               </motion.div>
             </Button>
           </motion.div>
