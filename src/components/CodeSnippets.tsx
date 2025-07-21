@@ -20,12 +20,12 @@ const CodeSnippets = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSnippet((prev) => (prev + 1) % snippets.length);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="absolute top-1/4 right-10 hidden lg:block">
+    <div className="absolute top-40 right-64 hidden lg:block">
       <motion.div
         key={currentSnippet}
         initial={{ opacity: 0, x: 50 }}
