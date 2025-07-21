@@ -5,11 +5,16 @@ const CodeSnippets = () => {
   const [currentSnippet, setCurrentSnippet] = useState(0);
   
   const snippets = [
-    "const developer = { skills: ['React', 'Node.js', 'Python'] };",
+    "const developer = { skills: ['React.js', 'Next.js', 'Java'] };",
     "function createAwesome() { return innovation + creativity; }",
     "const passion = code => results.map(dream => reality);",
     "while(learning) { skills++; opportunities.push(new Success()); }",
     "const magic = await Promise.resolve(hardWork + dedication);",
+    "// fueledBy.includes('coffee ☕') && playlist.isPlaying('lofi 🎧');",
+    "try { code(); } catch (error) { console.log('Debug mode: ON 🐞'); }",
+    "const rudraksh = { role: 'Full Stack Developer', loves: ['coding', 'coffee', 'music'] };",
+    "setInterval(() => console.log('Still coding... 💻'), 10000);",
+    "if (bug.exists()) { fix(); coffee.refill(); tryAgain(); }",
   ];
 
   useEffect(() => {
