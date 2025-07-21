@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const Skills = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [selectedCategory, setSelectedCategory] = useState("All");
   
   const techSkills = [
     // Programming Languages
@@ -44,6 +45,14 @@ const Skills = () => {
     { name: "Figma", icon: "🎨", category: "Design", color: "from-purple-400 to-purple-600" },
     { name: "VS Code", icon: "💻", category: "Tools", color: "from-blue-400 to-blue-600" }
   ];
+
+  // Get unique categories and add "All" option
+  const categories = ["All", ...Array.from(new Set(techSkills.map(skill => skill.category)))];
+  
+  // Filter skills based on selected category
+  const filteredSkills = selectedCategory === "All" 
+    ? techSkills 
+    : techSkills.filter(skill => skill.category === selectedCategory);
 
   return (
     <section id="skills" className="py-20 px-6 relative overflow-hidden" ref={ref}>
@@ -138,9 +147,39 @@ const Skills = () => {
           </p>
         </motion.div>
 
+        {/* Tech Categories Filter */}
+        <motion.div 
+          className="flex flex-wrap justify-center gap-3 mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          {categories.map((category, index) => (
+            <motion.button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-6 py-3 rounded-full border transition-all duration-300 font-medium ${
+                selectedCategory === category
+                  ? 'bg-accent text-accent-foreground border-accent shadow-lg shadow-accent/25'
+                  : 'glass-effect border-border/30 hover:border-accent/50 hover:bg-accent/10 text-muted-foreground hover:text-foreground'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.7 + index * 0.1 }}
+            >
+              {category}
+            </motion.button>
+          ))}
+        </motion.div>
+
         {/* Floating Tech Skills Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6 max-w-6xl mx-auto">
-          {techSkills.map((skill, index) => (
+        <motion.div 
+          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6 max-w-6xl mx-auto min-h-[400px]"
+          key={selectedCategory} // Force re-render when category changes
+        >
+          {filteredSkills.map((skill, index) => (
             <motion.div
               key={skill.name}
               initial={{ 
@@ -231,29 +270,24 @@ const Skills = () => {
               </motion.div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Tech Categories Summary */}
+        {/* Skills Count Display */}
         <motion.div 
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 30 }}
+          className="mt-12 text-center"
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1.5 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
         >
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-            {Array.from(new Set(techSkills.map(skill => skill.category))).map((category, index) => (
-              <motion.span 
-                key={category}
-                className="px-3 py-1 glass-effect rounded-full border border-border/30 hover:border-accent/50 transition-colors duration-300"
-                whileHover={{ scale: 1.05 }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 1.7 + index * 0.1 }}
-              >
-                {category}
-              </motion.span>
-            ))}
-          </div>
+          <motion.p 
+            className="text-muted-foreground"
+            key={selectedCategory}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            Showing <span className="text-accent font-semibold">{filteredSkills.length}</span> {selectedCategory === "All" ? "technologies" : `${selectedCategory.toLowerCase()} skills`}
+          </motion.p>
         </motion.div>
       </div>
     </section>
