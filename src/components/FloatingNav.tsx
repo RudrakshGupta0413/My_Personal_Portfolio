@@ -49,7 +49,7 @@ const FloatingNav = () => {
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: 1 }}
-      className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 hidden lg:flex flex-col gap-4"
+      className="fixed right-6 top-2/3 transform -translate-y-1/2 z-50 hidden lg:flex flex-col gap-4"
     >
       {/* Navigation */}
       <div className="glass-effect rounded-full p-2 space-y-2">
@@ -78,7 +78,7 @@ const FloatingNav = () => {
       </div>
 
       {/* Social Links */}
-      <div className="glass-effect rounded-full p-2 space-y-2">
+      <div className="glass-effect rounded-full p-2 space-y-2 flex">
         {socialItems.map((item, index) => (
           <motion.a
             key={index}

@@ -2,19 +2,23 @@ import { ArrowDown, Github, Linkedin, Mail, Terminal } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 // Using the uploaded image directly
-const developerPhoto = "/lovable-uploads/527e4f40-1c8f-4c3f-b934-cf5361a2627d.png";
+const developerPhoto =
+  "/lovable-uploads/527e4f40-1c8f-4c3f-b934-cf5361a2627d.png";
 import ParticleBackground from "./ParticleBackground";
 import CodeSnippets from "./CodeSnippets";
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    >
       {/* Animated Particle Background */}
       <ParticleBackground />
-      
+
       {/* Floating Code Snippets */}
       <CodeSnippets />
-      
+
       {/* Morphing shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -26,7 +30,7 @@ const Hero = () => {
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "linear"
+            ease: "linear",
           }}
         />
         <motion.div
@@ -39,16 +43,16 @@ const Hero = () => {
           transition={{
             duration: 15,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         />
       </div>
 
-      <div className="container mx-auto px-6 z-10">
+      <div className="container mx-10 px-6 z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
-          <motion.div 
-            className="space-y-8"
+          <motion.div
+            className="space-y-10"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -58,28 +62,33 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="flex items-center gap-2 text-accent text-lg font-medium"
+                className="flex items-center gap-2 text-accent text-[1.2rem] font-medium"
               >
                 <Terminal className="h-5 w-5" />
                 <span>console.log("Hello World!");</span>
               </motion.div>
-              
-              <motion.h1 
-                className="text-5xl lg:text-7xl font-bold"
+
+              <motion.h1
+                className="text-5xl lg:text-[5rem] font-bold"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                <span className="gradient-text">John</span>{" "}
                 <motion.span
-                  className="inline-block"
+                  className="gradient-text inline-block"
                   animate={{ rotateY: [0, 360] }}
-                  transition={{ duration: 2, delay: 1, repeat: Infinity, repeatDelay: 5 }}
+                  transition={{
+                    duration: 2,
+                    delay: 1,
+                    repeat: Infinity,
+                    repeatDelay: 5,
+                  }}
                 >
-                  Developer
-                </motion.span>
+                  Rudraksh
+                </motion.span>{" "}
+                <span>Gupta</span>
               </motion.h1>
-              
+
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -87,10 +96,12 @@ const Hero = () => {
                 className="relative"
               >
                 <h2 className="text-2xl lg:text-3xl text-muted-foreground">
-                  Full Stack Developer & 
+                  Full Stack Developer &
                   <motion.span
                     className="text-accent ml-2"
-                    animate={{ color: ["#00ffff", "#8b5cf6", "#ff00ff", "#00ffff"] }}
+                    animate={{
+                      color: ["#00ffff", "#8b5cf6", "#ff00ff", "#00ffff"],
+                    }}
                     transition={{ duration: 3, repeat: Infinity }}
                   >
                     Freelancer
@@ -98,25 +109,32 @@ const Hero = () => {
                 </h2>
               </motion.div>
             </div>
-            
-            <motion.p 
-              className="text-lg text-muted-foreground leading-relaxed max-w-lg"
+
+            <motion.p
+              className="text-[1.2rem] text-muted-foreground leading-relaxed max-w-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
-              I craft exceptional digital experiences through clean code and innovative solutions. 
-              Specializing in modern web technologies and helping businesses grow online.
+              I craft exceptional digital experiences through clean code and
+              innovative solutions. Specializing in modern web technologies and
+              helping businesses grow online.
             </motion.p>
 
-            <motion.div 
+            <motion.div
               className="flex flex-wrap gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button size="lg" className="glow-effect hover:glow-accent transition-all duration-300 group">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  size="lg"
+                  className="glow-effect hover:glow-accent transition-all duration-300 group"
+                >
                   <span className="mr-2">View My Work</span>
                   <motion.div
                     animate={{ y: [0, 5, 0] }}
@@ -126,15 +144,22 @@ const Hero = () => {
                   </motion.div>
                 </Button>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button variant="outline" size="lg" className="glass-effect hover:bg-secondary/20">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="glass-effect hover:bg-secondary/20"
+                >
                   Get In Touch
                 </Button>
               </motion.div>
             </motion.div>
 
             {/* Social Links */}
-            <motion.div 
+            <motion.div
               className="flex gap-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -159,7 +184,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Profile Image */}
-          <motion.div 
+          <motion.div
             className="flex justify-center lg:justify-end"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -171,53 +196,64 @@ const Hero = () => {
                 className="absolute inset-0 rounded-full border-2 border-emerald-400/30"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                style={{ width: "120%", height: "120%", left: "-10%", top: "-10%" }}
+                style={{
+                  width: "120%",
+                  height: "120%",
+                  left: "-10%",
+                  top: "-10%",
+                }}
               />
               <motion.div
                 className="absolute inset-0 rounded-full border border-cyan-400/20"
                 animate={{ rotate: -360 }}
                 transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                style={{ width: "140%", height: "140%", left: "-20%", top: "-20%" }}
+                style={{
+                  width: "140%",
+                  height: "140%",
+                  left: "-20%",
+                  top: "-20%",
+                }}
               />
-              
+
               {/* Background glow - adjusted for outdoor theme */}
-              <motion.div 
+              <motion.div
                 className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 via-cyan-400/20 to-blue-400/20 rounded-full blur-3xl opacity-40"
-                animate={{ 
+                animate={{
                   scale: [1, 1.2, 1],
                   opacity: [0.4, 0.6, 0.4],
-                  rotate: [0, 90, 180, 270, 360]
+                  rotate: [0, 90, 180, 270, 360],
                 }}
-                transition={{ 
-                  duration: 8, 
+                transition={{
+                  duration: 8,
                   repeat: Infinity,
-                  ease: "easeInOut" 
+                  ease: "easeInOut",
                 }}
               />
-              
+
               {/* Photo container with enhanced styling for the new image */}
-              <motion.div 
+              <motion.div
                 className="relative w-96 h-96 lg:w-[28rem] lg:h-[28rem] rounded-full overflow-hidden glass-effect border-2 border-primary/30 shadow-2xl"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
                 style={{
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)"
+                  boxShadow:
+                    "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)",
                 }}
               >
-                <motion.img 
-                  src={developerPhoto} 
-                  alt="Developer" 
+                <motion.img
+                  src={developerPhoto}
+                  alt="Developer"
                   className="w-full h-full object-cover object-center"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                   style={{
-                    filter: "brightness(1.1) contrast(1.05) saturate(1.1)"
+                    filter: "brightness(1.1) contrast(1.05) saturate(1.1)",
                   }}
                 />
-                
+
                 {/* Enhanced overlay effect for the outdoor photo */}
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
+
                 {/* Subtle outdoor-themed border glow */}
                 <div className="absolute inset-0 rounded-full border-2 border-emerald-400/20 opacity-60" />
               </motion.div>
@@ -227,7 +263,7 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}

@@ -7,10 +7,10 @@ const About = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const stats = [
-    { icon: Code, label: "Projects Completed", value: "50+", color: "from-cyan-400 to-cyan-600" },
+    { icon: Code, label: "Projects Completed", value: "15+", color: "from-cyan-400 to-cyan-600" },
     { icon: Coffee, label: "Cups of Coffee", value: "1000+", color: "from-amber-400 to-amber-600" },
-    { icon: Heart, label: "Happy Clients", value: "25+", color: "from-pink-400 to-pink-600" },
-    { icon: Zap, label: "Years Experience", value: "5+", color: "from-purple-400 to-purple-600" }
+    { icon: Heart, label: "Happy Clients", value: "10+", color: "from-pink-400 to-pink-600" },
+    { icon: Zap, label: "Years Experience", value: "4+", color: "from-purple-400 to-purple-600" }
   ];
 
   return (
@@ -135,7 +135,7 @@ const About = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
           {/* Content */}
           <motion.div 
             className="space-y-6"
