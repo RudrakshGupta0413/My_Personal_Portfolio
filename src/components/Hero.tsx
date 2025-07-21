@@ -1,7 +1,8 @@
 import { ArrowDown, Github, Linkedin, Mail, Terminal } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import developerPhoto from "@/assets/developer-photo.jpg";
+// Using the uploaded image directly
+const developerPhoto = "/lovable-uploads/527e4f40-1c8f-4c3f-b934-cf5361a2627d.png";
 import ParticleBackground from "./ParticleBackground";
 import CodeSnippets from "./CodeSnippets";
 
@@ -165,50 +166,60 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
           >
             <div className="relative group">
-              {/* Animated rings */}
+              {/* Animated rings - updated colors for natural theme */}
               <motion.div
-                className="absolute inset-0 rounded-full border-2 border-primary/30"
+                className="absolute inset-0 rounded-full border-2 border-emerald-400/30"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 style={{ width: "120%", height: "120%", left: "-10%", top: "-10%" }}
               />
               <motion.div
-                className="absolute inset-0 rounded-full border border-accent/20"
+                className="absolute inset-0 rounded-full border border-cyan-400/20"
                 animate={{ rotate: -360 }}
                 transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                 style={{ width: "140%", height: "140%", left: "-20%", top: "-20%" }}
               />
               
-              {/* Background glow */}
+              {/* Background glow - adjusted for outdoor theme */}
               <motion.div 
-                className="absolute inset-0 bg-gradient-neon rounded-full blur-3xl opacity-30"
+                className="absolute inset-0 bg-gradient-to-r from-emerald-400/20 via-cyan-400/20 to-blue-400/20 rounded-full blur-3xl opacity-40"
                 animate={{ 
                   scale: [1, 1.2, 1],
-                  opacity: [0.3, 0.5, 0.3] 
+                  opacity: [0.4, 0.6, 0.4],
+                  rotate: [0, 90, 180, 270, 360]
                 }}
                 transition={{ 
-                  duration: 4, 
+                  duration: 8, 
                   repeat: Infinity,
                   ease: "easeInOut" 
                 }}
               />
               
-              {/* Photo container */}
+              {/* Photo container with enhanced styling for the new image */}
               <motion.div 
-                className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glass-effect glow-neon border-2 border-primary/20"
+                className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glass-effect border-2 border-primary/30 shadow-2xl"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
+                style={{
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)"
+                }}
               >
                 <motion.img 
                   src={developerPhoto} 
-                  alt="John Developer" 
-                  className="w-full h-full object-cover"
+                  alt="Developer" 
+                  className="w-full h-full object-cover object-center"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.5 }}
+                  style={{
+                    filter: "brightness(1.1) contrast(1.05) saturate(1.1)"
+                  }}
                 />
                 
-                {/* Overlay effect on hover */}
-                <div className="absolute inset-0 bg-gradient-neon/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {/* Enhanced overlay effect for the outdoor photo */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Subtle outdoor-themed border glow */}
+                <div className="absolute inset-0 rounded-full border-2 border-emerald-400/20 opacity-60" />
               </motion.div>
             </div>
           </motion.div>
