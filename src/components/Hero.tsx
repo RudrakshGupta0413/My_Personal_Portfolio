@@ -197,7 +197,7 @@ const Hero = () => {
               
               {/* Photo container with enhanced styling for the new image */}
               <motion.div 
-                className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden glass-effect border-2 border-primary/30 shadow-2xl"
+                className="relative w-96 h-96 lg:w-[28rem] lg:h-[28rem] rounded-full overflow-hidden glass-effect border-2 border-primary/30 shadow-2xl"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
                 style={{
