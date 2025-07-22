@@ -186,7 +186,7 @@ const Hero = () => {
                 },
                 {
                   icon: SiHashnode,
-                  href: "https://github.com/RudrakshGupta0413",
+                  href: "https://rudrakshgupta40.hashnode.dev/",
                   color: "hover:text-neon-blue"
                 },
               ].map((social, index) => (
