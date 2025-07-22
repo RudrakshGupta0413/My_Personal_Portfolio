@@ -135,7 +135,7 @@ const Hero = () => {
                   size="lg"
                   className="glow-effect hover:glow-accent transition-all duration-300 group"
                 >
-                  <span className="mr-2">View My Work</span>
+                  <span className="mr-2"><a href="#projects">View My Work</a></span>
                   <motion.div
                     animate={{ y: [0, 5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
@@ -151,9 +151,9 @@ const Hero = () => {
                 <Button
                   variant="outline"
                   size="lg"
-                  className="glass-effect hover:bg-secondary/20"
+                  className="glow-effect hover:bg-secondary/60 hover:text-white"
                 >
-                  Get In Touch
+                  <a href="#contact">Get In Touch</a>
                 </Button>
               </motion.div>
             </motion.div>
@@ -166,13 +166,27 @@ const Hero = () => {
               transition={{ delay: 1.2 }}
             >
               {[
-                { icon: Github, href: "#", color: "hover:text-neon-purple" },
-                { icon: Linkedin, href: "#", color: "hover:text-neon-cyan" },
-                { icon: Mail, href: "#", color: "hover:text-neon-pink" },
+                {
+                  icon: Github,
+                  href: "https://github.com/RudrakshGupta0413",
+                  color: "hover:text-neon-purple",
+                },
+                {
+                  icon: Linkedin,
+                  href: "https://www.linkedin.com/in/rudraksh-gupta-664b591b2/",
+                  color: "hover:text-neon-cyan",
+                },
+                {
+                  icon: Mail,
+                  href: "mailto:rudrakshgupta40@gmail.com",
+                  color: "hover:text-neon-pink",
+                },
               ].map((social, index) => (
                 <motion.a
                   key={index}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`text-muted-foreground ${social.color} transition-all duration-300 p-3 rounded-lg hover:bg-secondary/20 group`}
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.95 }}

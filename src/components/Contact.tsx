@@ -23,15 +23,15 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      value: "john@developer.com",
+      value: "rudrakshgupta40@gmail.com",
       description: "Drop me a line anytime",
       color: "from-blue-400 to-blue-600"
     },
     {
       icon: Phone,
       title: "Phone",
-      value: "+1 (555) 123-4567",
-      description: "Mon-Fri from 8am to 6pm",
+      value: "+91 6396883674 ",
+      description: "Mon-Sat from 8am to 10pm",
       color: "from-green-400 to-green-600"
     },
     {
@@ -52,7 +52,8 @@ const Contact = () => {
 
   const services = [
     { icon: "🚀", text: "Full-stack web development" },
-    { icon: "📱", text: "Mobile app development" },
+    { icon: "💻", text: "Frontend web development" },
+    { icon: "👨‍💻", text: "Backend web development" },
     { icon: "💡", text: "Technical consulting" },
     { icon: "🔧", text: "Code reviews & optimization" },
     { icon: "☁️", text: "Cloud deployment & DevOps" },
@@ -65,7 +66,7 @@ const Contact = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-15">
         {/* Database cylinder animations */}
         <motion.div
-          className="absolute top-20 left-10 w-8 h-16 bg-gradient-to-b from-blue-500/30 to-blue-600/30 rounded-full"
+          className="absolute top-20 left-10 w-8 h-16 bg-gradient-to-b from-blue-500/90 to-blue-600/80 rounded-full"
           animate={{
             scaleY: [1, 1.2, 1],
             opacity: [0.3, 0.7, 0.3],
@@ -78,7 +79,7 @@ const Contact = () => {
         />
         
         <motion.div
-          className="absolute bottom-32 right-20 w-6 h-12 bg-gradient-to-b from-green-500/30 to-green-600/30 rounded-full"
+          className="absolute bottom-32 right-20 w-6 h-12 bg-gradient-to-b from-green-500/50 to-green-600/50 rounded-full"
           animate={{
             scaleY: [1.2, 1, 1.2],
             opacity: [0.5, 0.8, 0.5],
@@ -92,17 +93,17 @@ const Contact = () => {
         />
         
         {/* Server rack visualization */}
-        <motion.div className="absolute top-1/3 right-10 space-y-2">
-          {Array.from({ length: 5 }).map((_, i) => (
+        <motion.div className="absolute top-1/3 right-20 space-y-2">
+          {Array.from({ length: 8 }).map((_, i) => (
             <motion.div
               key={i}
-              className="w-12 h-2 bg-orange-400/30 rounded-sm"
+              className="w-16 h-2 bg-orange-400/70 rounded-sm"
               animate={{
                 opacity: [0.2, 0.8, 0.2],
                 scaleX: [0.8, 1, 0.8],
               }}
               transition={{
-                duration: 3,
+                duration: 6,
                 repeat: Infinity,
                 delay: i * 0.3,
               }}
@@ -112,7 +113,7 @@ const Contact = () => {
         
         {/* API request visualization */}
         <motion.div
-          className="absolute top-1/2 left-1/4"
+          className="absolute top-80 left-1/4"
           animate={{
             x: [0, 300, 0],
           }}
@@ -134,9 +135,9 @@ const Contact = () => {
               }}
             />
             <motion.div
-              className="text-cyan-400/60 text-xs font-mono"
+              className="text-cyan-400/90 text-xs font-mono"
               animate={{
-                opacity: [0.5, 1, 0.5],
+                opacity: [1.5, 1, 1.5],
               }}
               transition={{
                 duration: 2,
@@ -150,12 +151,14 @@ const Contact = () => {
         
         {/* Terminal cursor blinking */}
         <motion.div
-          className="absolute bottom-20 left-20 text-green-400/50 text-xl font-mono"
+          className="absolute bottom-20 left-40 text-green-400/70 text-xl font-mono"
           animate={{
-            opacity: [0, 1, 0],
+            opacity: [0, 1, 1, 0],
           }}
           transition={{
             duration: 1.5,
+            times: [0, 0.2, 0.8, 1],
+            ease: "easeOut",
             repeat: Infinity,
           }}
         >
@@ -164,10 +167,10 @@ const Contact = () => {
         
         {/* Floating command prompts */}
         <motion.div
-          className="absolute top-20 right-1/3 text-purple-400/40 text-sm font-mono"
+          className="absolute top-20 right-1/3 text-purple-400/80 text-md font-mono"
           animate={{
-            y: [0, -10, 0],
-            opacity: [0.3, 0.7, 0.3],
+            y: [0, -15, 0],
+            opacity: [4.5, 3.0, 1.5],
           }}
           transition={{
             duration: 6,
@@ -178,17 +181,17 @@ const Contact = () => {
         </motion.div>
         
         <motion.div
-          className="absolute bottom-1/3 left-10 text-yellow-400/40 text-sm font-mono"
+          className="absolute bottom-1/3 left-8 text-yellow-400/70 text-md font-mono"
           animate={{
             scale: [0.9, 1.1, 0.9],
-            opacity: [0.4, 0.8, 0.4],
+            opacity: [1.8, 0.8, 1.8],
           }}
           transition={{
             duration: 7,
             repeat: Infinity,
           }}
         >
-          git commit -m "feature"
+          git commit -m "services"
         </motion.div>
         
         {/* Data flow visualization */}
