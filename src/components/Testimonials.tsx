@@ -31,7 +31,132 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="testimonials" className="py-16 px-6 bg-surface-dark/50" ref={ref}>
+    <section id="testimonials" className="py-16 px-6 bg-surface-dark/50 relative overflow-hidden" ref={ref}>
+      {/* Network/Connection Animation Background */}
+      <div className="absolute inset-0 opacity-15 pointer-events-none">
+        {/* Animated network nodes */}
+        {Array.from({ length: 8 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-blue-400 rounded-full"
+            style={{
+              left: `${20 + (i * 10)}%`,
+              top: `${30 + Math.sin(i) * 20}%`,
+            }}
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.3, 0.8, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              delay: i * 0.5,
+            }}
+          />
+        ))}
+        
+        {/* Connection lines between nodes */}
+        <svg className="absolute inset-0 w-full h-full">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <motion.line
+              key={i}
+              x1={`${20 + (i * 10)}%`}
+              y1={`${30 + Math.sin(i) * 20}%`}
+              x2={`${30 + (i * 10)}%`}
+              y2={`${30 + Math.sin(i + 1) * 20}%`}
+              stroke="hsl(var(--accent))"
+              strokeWidth="1"
+              opacity="0.3"
+              strokeDasharray="3,3"
+              animate={{
+                strokeDashoffset: [0, -6],
+                opacity: [0.2, 0.6, 0.2],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                delay: i * 0.3,
+              }}
+            />
+          ))}
+        </svg>
+        
+        {/* Floating WiFi symbols */}
+        <motion.div
+          className="absolute top-20 left-10 text-blue-400/40 text-4xl"
+          animate={{
+            y: [0, -10, 0],
+            rotate: [0, 5, 0],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          📶
+        </motion.div>
+        
+        <motion.div
+          className="absolute bottom-20 right-20 text-purple-400/40 text-3xl"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, -10, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          🔗
+        </motion.div>
+        
+        {/* Cloud connectivity symbols */}
+        <motion.div
+          className="absolute top-1/3 right-1/4 text-cyan-400/30 text-5xl"
+          animate={{
+            x: [0, 15, 0],
+            y: [0, -8, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          ☁️
+        </motion.div>
+        
+        {/* Data transfer visualization */}
+        <motion.div
+          className="absolute top-1/2 left-1/4 flex gap-1"
+          animate={{
+            x: [0, 200, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          {Array.from({ length: 3 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="w-1 h-1 bg-green-400 rounded-full"
+              animate={{
+                opacity: [0, 1, 0],
+                scale: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+            />
+          ))}
+        </motion.div>
+      </div>
       <div className="container mx-auto">
         <motion.div 
           className="text-center mb-12"

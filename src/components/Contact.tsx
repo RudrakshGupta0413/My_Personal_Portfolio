@@ -61,52 +61,170 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20 px-6 relative overflow-hidden" ref={ref}>
-      {/* Animated Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Floating geometric shapes */}
+      {/* Server/Database Animation Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-15">
+        {/* Database cylinder animations */}
         <motion.div
-          className="absolute top-20 left-10 w-40 h-40 bg-gradient-neon opacity-10 rounded-full blur-2xl"
+          className="absolute top-20 left-10 w-8 h-16 bg-gradient-to-b from-blue-500/30 to-blue-600/30 rounded-full"
           animate={{
-            scale: [1, 1.3, 1],
-            x: [0, 30, 0],
-            y: [0, -20, 0],
+            scaleY: [1, 1.2, 1],
+            opacity: [0.3, 0.7, 0.3],
           }}
           transition={{
-            duration: 25,
+            duration: 4,
             repeat: Infinity,
             ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute bottom-32 right-20 w-32 h-32 bg-neon-pink opacity-15 rounded-full blur-xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            x: [0, -40, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute top-1/2 right-10 w-24 h-24 bg-neon-cyan opacity-20 rounded-full blur-lg"
-          animate={{
-            scale: [1, 1.5, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear"
           }}
         />
         
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
-        </div>
+        <motion.div
+          className="absolute bottom-32 right-20 w-6 h-12 bg-gradient-to-b from-green-500/30 to-green-600/30 rounded-full"
+          animate={{
+            scaleY: [1.2, 1, 1.2],
+            opacity: [0.5, 0.8, 0.5],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        
+        {/* Server rack visualization */}
+        <motion.div className="absolute top-1/3 right-10 space-y-2">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="w-12 h-2 bg-orange-400/30 rounded-sm"
+              animate={{
+                opacity: [0.2, 0.8, 0.2],
+                scaleX: [0.8, 1, 0.8],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                delay: i * 0.3,
+              }}
+            />
+          ))}
+        </motion.div>
+        
+        {/* API request visualization */}
+        <motion.div
+          className="absolute top-1/2 left-1/4"
+          animate={{
+            x: [0, 300, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <motion.div
+              className="w-3 h-3 bg-cyan-400 rounded-full"
+              animate={{
+                scale: [1, 0.5, 1],
+              }}
+              transition={{
+                duration: 1,
+                repeat: Infinity,
+              }}
+            />
+            <motion.div
+              className="text-cyan-400/60 text-xs font-mono"
+              animate={{
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+              }}
+            >
+              POST /api/contact
+            </motion.div>
+          </div>
+        </motion.div>
+        
+        {/* Terminal cursor blinking */}
+        <motion.div
+          className="absolute bottom-20 left-20 text-green-400/50 text-xl font-mono"
+          animate={{
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+          }}
+        >
+          $█
+        </motion.div>
+        
+        {/* Floating command prompts */}
+        <motion.div
+          className="absolute top-20 right-1/3 text-purple-400/40 text-sm font-mono"
+          animate={{
+            y: [0, -10, 0],
+            opacity: [0.3, 0.7, 0.3],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+          }}
+        >
+          npm start
+        </motion.div>
+        
+        <motion.div
+          className="absolute bottom-1/3 left-10 text-yellow-400/40 text-sm font-mono"
+          animate={{
+            scale: [0.9, 1.1, 0.9],
+            opacity: [0.4, 0.8, 0.4],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+          }}
+        >
+          git commit -m "feature"
+        </motion.div>
+        
+        {/* Data flow visualization */}
+        <svg className="absolute inset-0 w-full h-full">
+          <motion.path
+            d="M100,100 Q300,50 500,100 T900,100"
+            stroke="hsl(var(--accent))"
+            strokeWidth="2"
+            fill="none"
+            opacity="0.3"
+            strokeDasharray="10,5"
+            animate={{
+              strokeDashoffset: [0, -15],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+          <motion.circle
+            cx="100"
+            cy="100"
+            r="3"
+            fill="hsl(var(--accent))"
+            opacity="0.6"
+            animate={{
+              cx: [100, 500, 900, 100],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        </svg>
       </div>
 
       <div className="container mx-auto relative z-10">

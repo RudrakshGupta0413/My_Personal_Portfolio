@@ -311,61 +311,124 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-20 px-6 relative overflow-hidden" ref={ref}>
-      {/* Enhanced animated background */}
-      <div className="absolute inset-0 opacity-20 pointer-events-none">
-        {/* Animated grid pattern */}
-        <motion.div 
-          className="absolute inset-0"
+      {/* Code Matrix Background Animation */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
+        {/* Binary code streams */}
+        {Array.from({ length: 12 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-green-400 font-mono text-xs leading-3"
+            style={{
+              left: `${(i * 8) + Math.random() * 10}%`,
+              top: -20,
+            }}
+            animate={{
+              y: ['0vh', '120vh'],
+            }}
+            transition={{
+              duration: 15 + Math.random() * 10,
+              repeat: Infinity,
+              ease: "linear",
+              delay: i * 0.5,
+            }}
+          >
+            {Array.from({ length: 30 }).map((_, j) => (
+              <div key={j} style={{ marginBottom: '8px' }}>
+                {Math.random() > 0.5 ? '1' : '0'}
+              </div>
+            ))}
+          </motion.div>
+        ))}
+        
+        {/* Floating code brackets */}
+        <motion.div
+          className="absolute top-1/4 left-10 text-blue-400/30 text-6xl font-mono"
           animate={{
-            backgroundPosition: ["0px 0px", "40px 40px", "0px 0px"]
+            rotate: [0, 360],
+            scale: [1, 1.2, 1],
           }}
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "linear"
+            ease: "easeInOut"
           }}
         >
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:40px_40px]" />
+          {'{ }'}
         </motion.div>
         
-        {/* Moving accent gradient */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/5 to-transparent"
+          className="absolute bottom-1/4 right-20 text-purple-400/30 text-8xl font-mono"
           animate={{
-            x: ["-100%", "100%"],
-            transition: {
-              duration: 20,
+            rotate: [360, 0],
+            y: [0, -20, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          &lt;/&gt;
+        </motion.div>
+        
+        {/* Animated circuit lines */}
+        <svg className="absolute inset-0 w-full h-full">
+          <motion.path
+            d="M0,50 Q200,100 400,50 T800,50"
+            stroke="hsl(var(--accent))"
+            strokeWidth="1"
+            fill="none"
+            opacity="0.2"
+            strokeDasharray="5,5"
+            animate={{
+              strokeDashoffset: [0, -10],
+            }}
+            transition={{
+              duration: 2,
               repeat: Infinity,
               ease: "linear"
-            }
-          }}
-        />
+            }}
+          />
+          <motion.path
+            d="M0,200 Q300,150 600,200 T1200,200"
+            stroke="hsl(var(--primary))"
+            strokeWidth="1"
+            fill="none"
+            opacity="0.15"
+            strokeDasharray="8,8"
+            animate={{
+              strokeDashoffset: [0, 16],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+        </svg>
         
-        {/* Floating orbs */}
+        {/* Git commit visualization */}
         <motion.div
-          className="absolute top-20 right-1/4 w-40 h-40 bg-gradient-primary opacity-10 rounded-full blur-3xl"
+          className="absolute top-1/2 right-1/4 w-3 h-3 bg-green-400 rounded-full opacity-50"
           animate={{
-            scale: [1, 1.3, 1],
-            x: [0, -30, 0],
-            y: [0, 20, 0],
+            scale: [1, 0, 1],
+            opacity: [0.5, 1, 0.5],
           }}
           transition={{
-            duration: 25,
+            duration: 3,
             repeat: Infinity,
-            ease: "easeInOut"
+            times: [0, 0.5, 1],
           }}
         />
         <motion.div
-          className="absolute bottom-20 left-1/3 w-32 h-32 bg-neon-cyan opacity-15 rounded-full blur-2xl"
+          className="absolute top-1/2 right-1/4 w-20 h-0.5 bg-green-400/30 origin-left"
           animate={{
-            scale: [1.2, 1, 1.2],
-            x: [0, 40, 0],
-            y: [0, -25, 0],
+            scaleX: [0, 1, 0],
           }}
           transition={{
-            duration: 18,
+            duration: 3,
             repeat: Infinity,
-            ease: "easeInOut"
+            times: [0, 0.7, 1],
           }}
         />
       </div>
