@@ -1,13 +1,37 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Heart, Code, ExternalLink } from "lucide-react";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Heart,
+  Code,
+  ExternalLink,
+} from "lucide-react";
+import { SiHashnode } from "react-icons/si";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   const socialLinks = [
-    { icon: Github, href: "#", label: "GitHub", color: "hover:text-gray-400" },
-    { icon: Linkedin, href: "#", label: "LinkedIn", color: "hover:text-blue-400" },
-    { icon: Mail, href: "#", label: "Email", color: "hover:text-red-400" },
+    {
+      icon: Github,
+      href: "https://github.com/RudrakshGupta0413",
+      label: "GitHub",
+      color: "hover:text-gray-400",
+    },
+    {
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/rudraksh-gupta-664b591b2/",
+      label: "LinkedIn",
+      color: "hover:text-blue-400",
+    },
+    { icon: Mail, href: "mailto:rudrakshgupta40@gmail.com", label: "Email", color: "hover:text-red-400" },
+    {
+      icon: SiHashnode,
+      href: "https://rudrakshgupta40.hashnode.dev/",
+      label: "Hashnode",
+      color: "hover:text-blue-600"
+    },
   ];
 
   const quickLinks = [
@@ -65,11 +89,13 @@ const Footer = () => {
               >
                 <Code className="h-6 w-6 text-primary" />
               </motion.div>
-              <h3 className="text-xl font-bold gradient-text">Rudraksh Gupta</h3>
+              <h3 className="text-xl font-bold gradient-text">
+                Rudraksh Gupta
+              </h3>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Crafting exceptional digital experiences through clean code and innovative solutions. 
-              Let's build something amazing together.
+              Crafting exceptional digital experiences through clean code and
+              innovative solutions. Let's build something amazing together.
             </p>
           </motion.div>
 
@@ -81,7 +107,9 @@ const Footer = () => {
             viewport={{ once: true }}
             className="space-y-4"
           >
-            <h4 className="text-lg font-semibold text-foreground">Quick Links</h4>
+            <h4 className="text-lg font-semibold text-foreground">
+              Quick Links
+            </h4>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <motion.li key={link.name}>
