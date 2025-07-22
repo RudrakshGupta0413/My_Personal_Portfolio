@@ -24,7 +24,17 @@ import {
   siFigma,
   siLinux,
   siFramer,
-  siGithubactions
+  siGithubactions,
+  siApachekafka,
+  siCss,
+  siPostman,
+  siNetlify,
+  siRender,
+  siSocketdotio,
+  siElevenlabs,
+  siShadcnui,
+  siOpenai,
+  siClerk,
 } from "simple-icons/icons";
 
 const Skills = () => {
@@ -92,11 +102,18 @@ const Skills = () => {
       color: "from-orange-400 to-orange-600",
     },
     {
-      name: "CSS3",
-      // iconPath: siCss3.path,
-      // hex: siCss3.hex,
+      name: "CSS",
+      iconPath: siCss.path,
+      hex: siCss.hex,
       category: "Frontend",
       color: "from-blue-400 to-purple-600",
+    },
+    {
+      name: "shadcn/ui",
+      iconPath: siShadcnui.path,
+      hex: siShadcnui.hex,
+      category: "Frontend",
+      color: "from-blue-400 to-red-600",
     },
     // Backend Technologies
     {
@@ -121,11 +138,11 @@ const Skills = () => {
       color: "from-green-400 to-red-600",
     },
     {
-      name: "REST API",
-      // iconPath: siRestapi.path,
-      // hex: "4285F4",
-      category: "Backend",
-      color: "from-indigo-400 to-indigo-600",
+      name: "Socket.io",
+      iconPath: siSocketdotio.path,
+      hex: siSocketdotio.hex,
+      category: "Database",
+      color: "from-pink-400 to-emerald-700",
     },
 
     // Databases
@@ -150,12 +167,12 @@ const Skills = () => {
       category: "Database",
       color: "from-blue-400 to-blue-700",
     },
-     {
+    {
       name: "Redis",
       iconPath: siRedis.path,
       hex: siRedis.hex,
       category: "Database",
-      color: "rom-emerald-400 to-emerald-700",
+      color: "from-pink-400 to-emerald-700",
     },
     {
       name: "Firebase",
@@ -174,19 +191,19 @@ const Skills = () => {
 
     // Cloud & DevOps
 
-    // {
-    //   name: "AWS",
-    //   iconPath: siAmazonaws.path,
-    //   hex: siAmazonaws.hex,
-    //   category: "Cloud",
-    //   color: "from-orange-400 to-orange-600",
-    // },
     {
       name: "Docker",
       iconPath: siDocker.path,
       hex: siDocker.hex,
       category: "DevOps",
       color: "from-blue-400 to-blue-600",
+    },
+    {
+      name: "Kafka",
+      iconPath: siApachekafka.path,
+      hex: siApachekafka.hex,
+      category: "DevOps",
+      color: "from-purple-400 to-green-600",
     },
     {
       name: "Git",
@@ -213,8 +230,32 @@ const Skills = () => {
       name: "Vercel",
       iconPath: siVercel.path,
       hex: siVercel.hex,
-      category: "Cloud",
+      category: "DevOps",
       color: "from-gray-400 to-gray-600",
+    },
+    {
+      name: "Netlify",
+      iconPath: siNetlify.path,
+      hex: siNetlify.hex,
+      category: "DevOps",
+      color: "from-blue-400 to-blue-600",
+    },
+    {
+      name: "Render",
+      iconPath: siRender.path,
+      hex: siRender.hex,
+      category: "DevOps",
+      color: "from-red-400 to-red-600",
+    },
+
+    // Authentication
+    
+    {
+      name: "Clerk",
+      iconPath: siClerk.path,
+      hex: siClerk.hex,
+      category: "Authentication",
+      color: "from-violet-500 to-indigo-700",
     },
 
     // Tools
@@ -240,10 +281,25 @@ const Skills = () => {
       color: "from-yellow-400 to-yellow-600",
     },
     {
-      name: "VS Code",
-      icon: "💻",
+      name: "Postman",
+      iconPath: siPostman.path,
+      hex: siPostman.hex,
       category: "Tools",
       color: "from-blue-400 to-blue-600",
+    },
+    {
+      name: "ElevenLabs",
+      iconPath: siElevenlabs.path,
+      hex: siElevenlabs.hex,
+      category: "Tools",
+      color: "from-emerald-400 to-emerald-700",
+    },
+    {
+      name: "OpenAI",
+      iconPath: siOpenai.path,
+      hex: siOpenai.hex,
+      category: "Tools",
+      color: "from-purple-400 to-purple-600",
     },
   ];
 
