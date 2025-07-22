@@ -116,9 +116,9 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
             >
-              I craft exceptional digital experiences through clean code and
-              innovative solutions. Specializing in modern web technologies and
-              helping businesses grow online.
+              Turning coffee into code and ideas into reality. I build
+              full-stack solutions with modern web tech, a love for learning,
+              and a passion for digital innovation.
             </motion.p>
 
             <motion.div
