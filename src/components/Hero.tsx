@@ -48,11 +48,11 @@ const Hero = () => {
         />
       </div>
 
-      <div className="container mx-10 px-6 z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-6 z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[80vh] lg:min-h-0">
           {/* Text Content */}
           <motion.div
-            className="space-y-10"
+            className="space-y-6 lg:space-y-10 text-center lg:text-left"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -69,7 +69,7 @@ const Hero = () => {
               </motion.div>
 
               <motion.h1
-                className="text-5xl lg:text-[5rem] font-bold"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-[5rem] font-bold leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
@@ -95,7 +95,7 @@ const Hero = () => {
                 transition={{ delay: 0.6 }}
                 className="relative"
               >
-                <h2 className="text-2xl lg:text-3xl text-muted-foreground">
+                <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground">
                   Full Stack Developer &
                   <motion.span
                     className="text-accent ml-2"
@@ -111,7 +111,7 @@ const Hero = () => {
             </div>
 
             <motion.p
-              className="text-[1.2rem] text-muted-foreground leading-relaxed max-w-lg"
+              className="text-sm sm:text-base lg:text-[1.2rem] text-muted-foreground leading-relaxed max-w-lg mx-auto lg:mx-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
@@ -122,7 +122,7 @@ const Hero = () => {
             </motion.p>
 
             <motion.div
-              className="flex flex-wrap gap-4"
+              className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1 }}
@@ -160,7 +160,7 @@ const Hero = () => {
 
             {/* Social Links */}
             <motion.div
-              className="flex gap-6"
+              className="flex gap-6 justify-center lg:justify-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2 }}
@@ -232,7 +232,7 @@ const Hero = () => {
 
               {/* Photo container with enhanced styling for the new image */}
               <motion.div
-                className="relative w-96 h-96 lg:w-[28rem] lg:h-[28rem] rounded-full overflow-hidden glass-effect border-2 border-primary/30 shadow-2xl"
+                className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[28rem] lg:h-[28rem] rounded-full overflow-hidden glass-effect border-2 border-primary/30 shadow-2xl"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.3 }}
                 style={{

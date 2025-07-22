@@ -96,6 +96,69 @@ const About = () => {
           <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.1)_1px,transparent_1px)] bg-[size:100px_100px]" />
         </motion.div>
 
+        {/* Animated floating code elements */}
+        <motion.div 
+          className="absolute top-12 left-10 text-accent/30 text-3xl font-mono"
+          animate={{ 
+            y: [0, -150, 0],
+            opacity: [0.3, 0.8, 0.3],
+            rotate: [0, 360, 720]
+          }}
+          transition={{ duration: 15, repeat: Infinity, delay: 0 }}
+        >
+          {'{ }'}
+        </motion.div>
+        <motion.div 
+          className="absolute top-20 right-16 text-neon-cyan/25 text-2xl font-mono"
+          animate={{ 
+            x: [0, -100, 0],
+            y: [0, -50, 0],
+            opacity: [0.2, 0.7, 0.2]
+          }}
+          transition={{ duration: 12, repeat: Infinity, delay: 3 }}
+        >
+          []
+        </motion.div>
+        <motion.div 
+          className="absolute bottom-20 left-1/4 text-neon-purple/30 text-xl font-mono"
+          animate={{ 
+            y: [0, -80, 0],
+            x: [0, 50, 0],
+            rotate: [0, -180, -360]
+          }}
+          transition={{ duration: 18, repeat: Infinity, delay: 1.5 }}
+        >
+          ()
+        </motion.div>
+        
+        {/* Binary code rain effect */}
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={`binary-${i}`}
+            className="absolute text-accent/10 text-xs font-mono"
+            style={{
+              left: `${10 + i * 8}%`,
+              top: `${-10}%`,
+            }}
+            animate={{
+              y: ["0vh", "120vh"],
+              opacity: [0, 0.8, 0]
+            }}
+            transition={{
+              duration: 8 + i * 0.5,
+              repeat: Infinity,
+              delay: i * 1.2,
+              ease: "linear"
+            }}
+          >
+            {Math.random() > 0.5 ? '1' : '0'}
+            <br />
+            {Math.random() > 0.5 ? '0' : '1'}
+            <br />
+            {Math.random() > 0.5 ? '1' : '0'}
+          </motion.div>
+        ))}
+
         {/* Floating geometric shapes */}
         {[...Array(6)].map((_, i) => (
           <motion.div

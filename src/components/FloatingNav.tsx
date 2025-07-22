@@ -77,8 +77,8 @@ const FloatingNav = () => {
         ))}
       </div>
 
-      {/* Social Links */}
-      <div className="glass-effect rounded-full p-2 space-y-2 flex">
+      {/* Social Links - Horizontal */}
+      <div className="glass-effect rounded-full p-2 flex space-x-2">
         {socialItems.map((item, index) => (
           <motion.a
             key={index}
