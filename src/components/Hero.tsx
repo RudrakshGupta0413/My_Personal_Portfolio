@@ -1,11 +1,12 @@
 import { ArrowDown, Github, Linkedin, Mail, Terminal } from "lucide-react";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 // Using the uploaded image directly
 const developerPhoto =
   "/lovable-uploads/527e4f40-1c8f-4c3f-b934-cf5361a2627d.png";
 import ParticleBackground from "./ParticleBackground";
 import CodeSnippets from "./CodeSnippets";
+import { SiHashnode } from "react-icons/si";
 
 const Hero = () => {
   return (
@@ -135,7 +136,9 @@ const Hero = () => {
                   size="lg"
                   className="glow-effect hover:glow-accent transition-all duration-300 group"
                 >
-                  <span className="mr-2"><a href="#projects">View My Work</a></span>
+                  <span className="mr-2">
+                    <a href="#projects">View My Work</a>
+                  </span>
                   <motion.div
                     animate={{ y: [0, 5, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
@@ -180,6 +183,11 @@ const Hero = () => {
                   icon: Mail,
                   href: "mailto:rudrakshgupta40@gmail.com",
                   color: "hover:text-neon-pink",
+                },
+                {
+                  icon: SiHashnode,
+                  href: "https://github.com/RudrakshGupta0413",
+                  color: "hover:text-neon-blue"
                 },
               ].map((social, index) => (
                 <motion.a

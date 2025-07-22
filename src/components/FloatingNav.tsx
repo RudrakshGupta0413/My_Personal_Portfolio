@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Home, User, Code, Briefcase, MessageSquare, Github, Linkedin, Mail } from 'lucide-react';
+import { SiHashnode } from "react-icons/si";
+
 
 const FloatingNav = () => {
   const [activeSection, setActiveSection] = useState('home');
@@ -14,9 +16,10 @@ const FloatingNav = () => {
   ];
 
   const socialItems = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Mail, href: '#', label: 'Email' },
+    { icon: Github, href: 'https://github.com/RudrakshGupta0413', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/rudraksh-gupta-664b591b2/', label: 'LinkedIn' },
+    { icon: Mail, href: 'mailto:rudrakshgupta40@gmail.com', label: 'Email' },
+    { icon: SiHashnode, href: 'https://github.com/RudrakshGupta0413', label: 'Hashnode' },
   ];
 
   useEffect(() => {
@@ -57,16 +60,15 @@ const FloatingNav = () => {
           <motion.button
             key={item.id}
             onClick={() => scrollToSection(item.id)}
-            className={`relative p-3 rounded-full transition-all duration-300 group ${
-              activeSection === item.id 
-                ? 'bg-primary text-primary-foreground glow-effect' 
+            className={`relative p-3 rounded-full transition-all duration-300 group ${activeSection === item.id
+                ? 'bg-primary text-primary-foreground glow-effect'
                 : 'text-muted-foreground hover:text-accent hover:bg-secondary/20'
-            }`}
+              }`}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
             <item.icon className="h-5 w-5" />
-            
+
             {/* Tooltip */}
             <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               <div className="bg-background border border-border rounded-lg px-3 py-1 text-sm whitespace-nowrap">
@@ -88,7 +90,7 @@ const FloatingNav = () => {
             whileTap={{ scale: 0.95 }}
           >
             <item.icon className="h-4 w-4" />
-            
+
             {/* Tooltip */}
             <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               <div className="bg-background border border-border rounded-lg px-3 py-1 text-sm whitespace-nowrap">
