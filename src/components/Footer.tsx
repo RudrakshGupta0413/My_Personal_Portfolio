@@ -141,6 +141,7 @@ const Footer = () => {
                 <motion.a
                   key={index}
                   href={social.href}
+                  target="_blank"
                   className={`p-3 rounded-lg bg-secondary/20 text-muted-foreground ${social.color} transition-all duration-300 group hover:bg-secondary/40`}
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}

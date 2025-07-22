@@ -35,6 +35,7 @@ import {
   siShadcnui,
   siOpenai,
   siClerk,
+  siStripe,
 } from "simple-icons/icons";
 
 const Skills = () => {
@@ -203,7 +204,7 @@ const Skills = () => {
       iconPath: siApachekafka.path,
       hex: siApachekafka.hex,
       category: "DevOps",
-      color: "from-purple-400 to-green-600",
+      color: "from-purple-700 to-green-600",
     },
     {
       name: "Git",
@@ -217,7 +218,7 @@ const Skills = () => {
       iconPath: siGithub.path,
       hex: siGithub.hex,
       category: "DevOps",
-      color: "from-yellow-400 to-yellow-600",
+      color: "from-slate-200 to-slate-400",
     },
     {
       name: "GitHub Actions",
@@ -300,6 +301,13 @@ const Skills = () => {
       hex: siOpenai.hex,
       category: "Tools",
       color: "from-purple-400 to-purple-600",
+    },
+    {
+      name: "Stripe",
+      iconPath: siStripe.path,
+      hex: siStripe.hex,
+      category: "Tools",
+      color: "from-green-400 to-green-600",
     },
   ];
 
