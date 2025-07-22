@@ -6,12 +6,14 @@ import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingNav from "@/components/FloatingNav";
+import ParallaxTransition from "@/components/ParallaxTransition";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
       <FloatingNav />
       <Hero />
+      <ParallaxTransition />
       <About />
       <Skills />
       <Projects />
