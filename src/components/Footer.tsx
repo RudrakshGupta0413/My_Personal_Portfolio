@@ -7,10 +7,12 @@ import {
   Code,
   ExternalLink,
 } from "lucide-react";
+import { useState } from "react";
 import { SiHashnode } from "react-icons/si";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [isOpen, setIsOpen] = useState(false);
 
   const socialLinks = [
     {
@@ -25,12 +27,17 @@ const Footer = () => {
       label: "LinkedIn",
       color: "hover:text-blue-400",
     },
-    { icon: Mail, href: "mailto:rudrakshgupta40@gmail.com", label: "Email", color: "hover:text-red-400" },
+    {
+      icon: Mail,
+      href: "mailto:rudrakshgupta40@gmail.com",
+      label: "Email",
+      color: "hover:text-red-400",
+    },
     {
       icon: SiHashnode,
       href: "https://rudrakshgupta40.hashnode.dev/",
       label: "Hashnode",
-      color: "hover:text-blue-600"
+      color: "hover:text-blue-600",
     },
   ];
 
@@ -81,7 +88,16 @@ const Footer = () => {
             viewport={{ once: true }}
             className="space-y-4"
           >
-            <div className="flex items-center gap-2">
+            <div
+              onClick={() => {
+                const homeSection = document.getElementById("home");
+                if (homeSection) {
+                  homeSection.scrollIntoView({ behavior: "smooth" });
+                }
+                setIsOpen(false);
+              }}
+              className="flex items-center gap-2 hover:cursor-pointer"
+            >
               <motion.div
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.5 }}

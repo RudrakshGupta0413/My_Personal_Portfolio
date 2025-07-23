@@ -166,7 +166,7 @@ const Skills = () => {
       iconPath: siMysql.path,
       hex: siMysql.hex,
       category: "Database",
-      color: "from-blue-400 to-blue-700",
+      color: "from-blue-200 to-blue-500",
     },
     {
       name: "Redis",
@@ -257,6 +257,11 @@ const Skills = () => {
       hex: siClerk.hex,
       category: "Authentication",
       color: "from-violet-500 to-indigo-700",
+    },
+    {
+      name: "NextAuth",
+      category: "Authentication",
+      color: "from-indigo-400 to-cyan-500"
     },
 
     // Tools

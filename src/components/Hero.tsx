@@ -49,8 +49,8 @@ const Hero = () => {
         />
       </div>
 
-      <div className="container mx-auto px-6 z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[80vh] lg:min-h-0">
+      <div className="container mx-auto px-2 z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[80vh] lg:min-h-0 md:mt-[5rem]">
           {/* Text Content */}
           <motion.div
             className="space-y-6 lg:space-y-10 text-center lg:text-left"
@@ -59,15 +59,15 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="space-y-2">
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="flex items-center gap-2 text-accent sm:text-lg md:text-xl text-[1.2rem] font-medium"
+                className="flex items-center gap-2 text-accent sm:text-lg md:text-[0.8rem] lg:text-[1rem] font-medium"
               >
                 <Terminal className="h-5 w-5" />
                 <span>console.log("Hello World!");</span>
-              </motion.div>
+              </motion.div> */}
 
               <motion.h1
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-[5rem] font-bold leading-tight"
@@ -77,7 +77,7 @@ const Hero = () => {
               >
                 <motion.span
                   className="gradient-text inline-block"
-                  animate={{ rotateY: [0, 360] }}
+                  // animate={{ rotateY: [0, 360] }}
                   transition={{
                     duration: 2,
                     delay: 1,

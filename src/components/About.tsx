@@ -239,27 +239,18 @@ const About = () => {
               <h3 className="text-2xl font-bold text-accent mb-4">
                 Full Stack Developer & Problem Solver
               </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                I'm a passionate full-stack developer with 4+ years of hands-on
-                experience spanning freelance work, impactful internships, and
-                real-world projects. My journey started with a simple "Hello
-                World" and has grown into building full-fledged web applications
-                that solve real problems and enhance user experiences.
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                I'm a full-stack developer with 4+ years of experience building
+                end-to-end web applications through freelance projects,
+                internships, and hands-on work. I specialize in creating
+                responsive front-ends, scalable back-ends, and clean,
+                maintainable code.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
-                I specialize in crafting seamless digital experiences— from
-                dynamic, responsive front-end interfaces to scalable and secure
-                back-end architectures. Whether it's developing modern APIs,
-                integrating third-party services, or architecting full-stack
-                solutions, I strive for clean, maintainable code and scalable
-                design.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Outside of coding, I enjoy diving into emerging tech trends,
-                contributing to open-source communities, and mentoring fellow
-                developers. I'm always fueled by coffee, music, and the thrill
-                of solving tough bugs. To me, every challenge is an opportunity
-                to learn and grow in this ever-evolving tech landscape.
+              <p className="text-muted-foreground text-lg leading-relaxed">
+                Passionate about solving real-world problems, I enjoy exploring
+                new technologies, contributing to open source, and mentoring
+                fellow developers. Fueled by curiosity (and coffee), I embrace
+                every challenge as an opportunity to learn and grow.
               </p>
             </motion.div>
 
@@ -270,7 +261,7 @@ const About = () => {
               transition={{ delay: 0.6 }}
               className="space-y-3"
             >
-              <h4 className="text-lg font-semibold text-foreground mb-3">
+              <h4 className="text-xl font-semibold text-foreground mb-3">
                 What drives me:
               </h4>
               <ul className="space-y-2">
@@ -285,7 +276,7 @@ const About = () => {
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ delay: 0.8 + index * 0.1 }}
-                    className="flex items-start gap-3 text-muted-foreground"
+                    className="flex items-start gap-3 text-muted-foreground text-lg"
                   >
                     <motion.div
                       whileHover={{ scale: 1.2, rotate: 180 }}

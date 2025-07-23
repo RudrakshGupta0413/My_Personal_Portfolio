@@ -12,7 +12,6 @@ const CodeSnippets = () => {
     "const magic = await Promise.resolve(hardWork + dedication);",
     "// fueledBy.includes('coffee ☕') && playlist.isPlaying('lofi 🎧');",
     "try { code(); } catch (error) { console.log('Debug mode: ON 🐞'); }",
-    "const rudraksh = { role: 'Full Stack Developer', loves: ['coding', 'coffee', 'music'] };",
     "setInterval(() => console.log('Still coding... 💻'), 10000);",
     "if (bug.exists()) { fix(); coffee.refill(); tryAgain(); }",
   ];
@@ -25,7 +24,7 @@ const CodeSnippets = () => {
   }, []);
 
   return (
-    <div className="absolute top-40 right-52 hidden lg:block">
+    <div className="absolute top-20 lg:right-10 hidden lg:block">
       <motion.div
         key={currentSnippet}
         initial={{ opacity: 0, x: 50 }}

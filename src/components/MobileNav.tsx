@@ -61,12 +61,26 @@ const MobileNav = () => {
       >
         <div className="glass-effect rounded-full p-3 flex items-center justify-between">
           {/* Logo/Brand */}
-          <motion.div
-            className="text-accent font-bold text-lg"
-            whileHover={{ scale: 1.05 }}
+
+          <div
+            onClick={() => {
+              const homeSection = document.getElementById("home");
+              if (homeSection) {
+                homeSection.scrollIntoView({ behavior: "smooth" });
+              }
+              setIsOpen(false);
+            }}
+            className="flex items-center gap-2 hover:cursor-pointer"
           >
-            RG
-          </motion.div>
+            <motion.div
+              whileHover={{ rotate: 360 }}
+              transition={{ duration: 0.5 }}
+              className="p-2 bg-primary/10 rounded-lg"
+            >
+              <Code className="h-6 w-6 text-primary" />
+            </motion.div>
+            <h3 className="text-xl font-bold gradient-text">Rudraksh Gupta</h3>
+          </div>
 
           {/* Menu Toggle */}
           <motion.button
