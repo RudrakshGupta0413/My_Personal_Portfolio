@@ -10,33 +10,37 @@ const Blogs = () => {
   const blogPosts = [
     {
       id: 1,
-      title: "Building Scalable React Applications with Modern Tools",
-      excerpt: "Exploring the latest techniques for creating maintainable and performant React applications using TypeScript, Vite, and modern state management.",
-      date: "2024-01-15",
-      readTime: "8 min read",
-      tags: ["React", "TypeScript", "Vite"],
-      url: "https://rudrakshgupta40.hashnode.dev/building-scalable-react-applications",
-      image: "/placeholder.svg",
+      title: "From React.js to Next.js: Elevate Your Web Development Game",
+      excerpt:
+        "Discover how transitioning from React.js to Next.js can supercharge your web development workflow with features like server-side rendering, API routes, and built-in performance optimization.",
+      date: "2024-06-04",
+      readTime: "6 min read",
+      tags: ["React", "Next.js", "Web Development", "Full Stack Development"],
+      url: "https://rudrakshgupta40.hashnode.dev/from-reactjs-to-nextjs-elevate-your-web-development-game",
+      image: "/blog1.png",
     },
+
     {
       id: 2,
-      title: "The Art of API Design: RESTful Best Practices",
-      excerpt: "Deep dive into designing robust and developer-friendly APIs that scale. Learn about authentication, versioning, and error handling strategies.",
-      date: "2024-01-08",
-      readTime: "12 min read",
-      tags: ["API", "REST", "Backend"],
-      url: "https://rudrakshgupta40.hashnode.dev/api-design-best-practices",
-      image: "/placeholder.svg",
+      title: "How to start with React.js: A Simple Guide for Beginners",
+      excerpt:
+        "A beginner-friendly guide to help you get started with React.js. Learn the core concepts, project setup, and how to build your first interactive UI components step by step.",
+      date: "2024-06-07",
+      readTime: "5 min read",
+      tags: ["React", "Web Development", "Javascript"],
+      url: "https://rudrakshgupta40.hashnode.dev/how-to-start-with-reactjs-a-simple-guide-for-beginners",
+      image: "/blog2.png",
     },
     {
       id: 3,
-      title: "Modern CSS Techniques for Responsive Design",
-      excerpt: "Mastering CSS Grid, Flexbox, and container queries to create responsive designs that work seamlessly across all devices and screen sizes.",
-      date: "2024-01-01",
+      title: "Discover HTMX: Revolutionizing Modern Web Development",
+      excerpt:
+        "Explore how HTMX is transforming modern web development by enabling dynamic, interactive user experiences using standard HTML—without relying heavily on JavaScript frameworks.",
+      date: "2024-06-22",
       readTime: "6 min read",
-      tags: ["CSS", "Design", "Frontend"],
-      url: "https://rudrakshgupta40.hashnode.dev/modern-css-techniques",
-      image: "/placeholder.svg",
+      tags: ["HTMX", "HTML5", "Frontend", "Web Development"],
+      url: "https://rudrakshgupta40.hashnode.dev/discover-htmx-revolutionizing-modern-web-development",
+      image: "/blog3.png",
     },
   ];
 
@@ -51,8 +55,8 @@ const Blogs = () => {
   };
 
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: 50,
       rotateX: -15,
     },
@@ -190,11 +194,11 @@ const Blogs = () => {
                 duration: 0.6,
                 ease: "easeOut",
               }}
-              whileHover={{ 
+              whileHover={{
                 y: -10,
                 scale: 1.02,
                 rotateX: 5,
-                transition: { duration: 0.3 }
+                transition: { duration: 0.3 },
               }}
               className="group relative cursor-pointer"
               style={{ perspective: "1000px" }}
@@ -208,9 +212,7 @@ const Blogs = () => {
                 onClick={() => window.open(post.url, "_blank")}
               >
                 {/* Background gradient */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                />
+                <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                 {/* Shimmer effect */}
                 <motion.div
@@ -234,9 +236,13 @@ const Blogs = () => {
                       delay: index * 0.5,
                     }}
                   >
-                    📖
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-full object-cover"
+                    />
                   </motion.div>
-                  
+
                   {/* Floating particles */}
                   {[...Array(3)].map((_, i) => (
                     <motion.div
@@ -306,7 +312,9 @@ const Blogs = () => {
                         className="px-2 py-1 text-xs bg-secondary/50 text-accent rounded-full border border-accent/20"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                        transition={{ delay: 1.2 + index * 0.1 + tagIndex * 0.05 }}
+                        transition={{
+                          delay: 1.2 + index * 0.1 + tagIndex * 0.05,
+                        }}
                         whileHover={{ scale: 1.1 }}
                       >
                         {tag}
@@ -352,7 +360,9 @@ const Blogs = () => {
             <Button
               size="lg"
               className="glow-effect hover:glow-accent transition-all duration-300"
-              onClick={() => window.open("https://rudrakshgupta40.hashnode.dev/", "_blank")}
+              onClick={() =>
+                window.open("https://rudrakshgupta40.hashnode.dev/", "_blank")
+              }
             >
               <span className="mr-2">View All Posts</span>
               <motion.div

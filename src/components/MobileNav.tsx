@@ -57,7 +57,7 @@ const MobileNav = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="fixed top-4 left-4 right-4 z-50 lg:hidden"
+        className="fixed top-2 left-4 right-4 z-50 lg:hidden md:overflow-hidden"
       >
         <div className="glass-effect rounded-full p-3 flex items-center justify-between">
           {/* Logo/Brand */}

@@ -58,12 +58,12 @@ const Hero = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="space-y-4">
+            <div className="space-y-2">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="flex items-center gap-2 text-accent text-[1.2rem] font-medium"
+                className="flex items-center gap-2 text-accent sm:text-lg md:text-xl text-[1.2rem] font-medium"
               >
                 <Terminal className="h-5 w-5" />
                 <span>console.log("Hello World!");</span>

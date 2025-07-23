@@ -6,6 +6,7 @@ import {
   Code,
   Briefcase,
   MessageSquare,
+  PenTool,
   Github,
   Linkedin,
   Mail,
@@ -19,7 +20,8 @@ const FloatingNav = () => {
     { id: "home", icon: Home, label: "Home" },
     { id: "skills", icon: Code, label: "Skills" },
     { id: "projects", icon: Briefcase, label: "Projects" },
-    { id: "testimonials", icon: MessageSquare, label: "Testimonials" },
+    { id: "blogs", icon: PenTool, label: "Blogs" },
+    // { id: "testimonials", icon: MessageSquare, label: "Testimonials" },
     { id: "contact", icon: User, label: "Contact" },
   ];
 
