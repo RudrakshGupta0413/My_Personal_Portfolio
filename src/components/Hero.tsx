@@ -97,7 +97,7 @@ const Hero = () => {
                 className="relative"
               >
                 <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground">
-                  Full Stack Developer &
+                  Full Stack Developer , Software Engineer &
                   <motion.span
                     className="text-accent ml-2"
                     animate={{
