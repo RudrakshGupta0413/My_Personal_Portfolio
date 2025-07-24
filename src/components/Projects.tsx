@@ -256,7 +256,6 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                 whileHover={{
                   scale: 1.15,
                   y: -4,
-                  boxShadow: "0 4px 20px hsl(var(--accent) / 0.3)",
                   transition: { duration: 0.2 },
                 }}
                 whileTap={{ scale: 0.95 }}
@@ -387,7 +386,7 @@ const Projects = () => {
       ref={ref}
     >
       {/* Code Matrix Background Animation */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 opacity-15 pointer-events-none overflow-hidden">
         {/* Binary code streams */}
         {Array.from({ length: 12 }).map((_, i) => (
           <motion.div

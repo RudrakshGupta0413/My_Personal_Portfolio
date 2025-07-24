@@ -8,30 +8,37 @@ const Testimonials = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const testimonials = [
     {
-      name: "Sarah Johnson",
-      role: "CEO, TechStart Inc",
-      content: "John delivered an exceptional e-commerce platform that exceeded our expectations. His attention to detail and technical expertise is outstanding.",
+      name: "Amit Gurawa",
+      role: "CEO, Amexus AI",
+      content:
+        "Rudraksh made a real impact during his internship. From web apps to AI voice integrations, he handled every task with focus and speed. A sharp mind with a proactive approach—great to work with!",
       rating: 5,
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+      avatar: "/Testimonial1.png",
     },
     {
-      name: "Mike Chen", 
-      role: "Product Manager, InnovateCorp",
-      content: "Working with John was a pleasure. He understood our requirements perfectly and delivered a scalable solution on time and within budget.",
+      name: "Ruchi",
+      role: "Founder, Ruchi Art House",
+      content:
+        "Rudraksh brought my vision to life with a beautiful, easy-to-navigate website. He listened patiently and delivered exactly what my small business needed. Super happy with the result!",
       rating: 5,
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+      avatar: "/Testimonial2.png",
     },
     {
-      name: "Emily Rodriguez",
-      role: "Founder, CreativeHub",
-      content: "John's full-stack expertise helped us build our dream platform. His communication skills and problem-solving approach are remarkable.",
-      rating: 5,
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
-    }
+      name: "Andrew Cook",
+      role: "Tech Consultant & Branding Coach",
+      content:
+        "Rudraksh did a great job building my personal site. It's clean, professional, and truly reflects my brand. He’s efficient, thoughtful, and easy to collaborate with.",
+      rating: 4,
+      avatar: "#",
+    },
   ];
 
   return (
-    <section id="testimonials" className="py-16 px-6 bg-surface-dark/50 relative overflow-hidden" ref={ref}>
+    <section
+      id="testimonials"
+      className="py-16 px-6 bg-surface-dark/50 relative overflow-hidden"
+      ref={ref}
+    >
       {/* Network/Connection Animation Background */}
       <div className="absolute inset-0 opacity-15 pointer-events-none">
         {/* Animated network nodes */}
@@ -40,7 +47,7 @@ const Testimonials = () => {
             key={i}
             className="absolute w-2 h-2 bg-blue-400 rounded-full"
             style={{
-              left: `${20 + (i * 10)}%`,
+              left: `${20 + i * 10}%`,
               top: `${30 + Math.sin(i) * 20}%`,
             }}
             animate={{
@@ -54,15 +61,15 @@ const Testimonials = () => {
             }}
           />
         ))}
-        
+
         {/* Connection lines between nodes */}
         <svg className="absolute inset-0 w-full h-full">
           {Array.from({ length: 6 }).map((_, i) => (
             <motion.line
               key={i}
-              x1={`${20 + (i * 10)}%`}
+              x1={`${20 + i * 10}%`}
               y1={`${30 + Math.sin(i) * 20}%`}
-              x2={`${30 + (i * 10)}%`}
+              x2={`${30 + i * 10}%`}
               y2={`${30 + Math.sin(i + 1) * 20}%`}
               stroke="hsl(var(--accent))"
               strokeWidth="1"
@@ -80,7 +87,7 @@ const Testimonials = () => {
             />
           ))}
         </svg>
-        
+
         {/* Floating WiFi symbols */}
         <motion.div
           className="absolute top-20 left-10 text-blue-400/40 text-4xl"
@@ -91,12 +98,12 @@ const Testimonials = () => {
           transition={{
             duration: 6,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
           📶
         </motion.div>
-        
+
         <motion.div
           className="absolute bottom-20 right-20 text-purple-400/40 text-3xl"
           animate={{
@@ -106,12 +113,12 @@ const Testimonials = () => {
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
           🔗
         </motion.div>
-        
+
         {/* Cloud connectivity symbols */}
         <motion.div
           className="absolute top-1/3 right-1/4 text-cyan-400/30 text-5xl"
@@ -122,12 +129,12 @@ const Testimonials = () => {
           transition={{
             duration: 10,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
           ☁️
         </motion.div>
-        
+
         {/* Data transfer visualization */}
         <motion.div
           className="absolute top-1/2 left-1/4 flex gap-1"
@@ -137,7 +144,7 @@ const Testimonials = () => {
           transition={{
             duration: 8,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
           {Array.from({ length: 3 }).map((_, i) => (
@@ -158,7 +165,7 @@ const Testimonials = () => {
         </motion.div>
       </div>
       <div className="container mx-auto">
-        <motion.div 
+        <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -183,7 +190,7 @@ const Testimonials = () => {
               style={{ transformStyle: "preserve-3d" }}
             >
               <Card className="p-6 glass-effect hover:glow-accent transition-all duration-500 border-border/50 h-full group">
-                <motion.div 
+                <motion.div
                   className="flex items-center mb-4"
                   whileHover={{ scale: 1.05 }}
                 >
@@ -207,27 +214,31 @@ const Testimonials = () => {
                     ))}
                   </div>
                 </motion.div>
-                
-                <motion.p 
+
+                <motion.p
                   className="text-muted-foreground mb-6 leading-relaxed group-hover:text-foreground transition-colors"
                   whileHover={{ x: 5 }}
                 >
                   "{testimonial.content}"
                 </motion.p>
-                
-                <motion.div 
+
+                <motion.div
                   className="flex items-center"
                   whileHover={{ x: 10 }}
                 >
-                  <motion.img 
-                    src={testimonial.avatar} 
+                  <motion.img
+                    src={testimonial.avatar}
                     alt={testimonial.name}
                     className="w-10 h-10 rounded-full mr-3 object-cover border-2 border-accent/20"
                     whileHover={{ scale: 1.1, rotate: 5 }}
                   />
                   <div>
-                    <h4 className="font-semibold text-sm">{testimonial.name}</h4>
-                    <p className="text-muted-foreground text-xs">{testimonial.role}</p>
+                    <h4 className="font-semibold text-sm">
+                      {testimonial.name}
+                    </h4>
+                    <p className="text-muted-foreground text-xs">
+                      {testimonial.role}
+                    </p>
                   </div>
                 </motion.div>
               </Card>
