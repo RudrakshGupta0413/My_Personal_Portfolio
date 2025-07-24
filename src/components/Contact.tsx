@@ -148,7 +148,7 @@ const Contact = () => {
               }}
             />
             <motion.div
-              className="text-cyan-400/90 text-xs font-mono"
+              className="text-cyan-400/100 text-md font-mono"
               animate={{
                 opacity: [1.5, 1, 1.5],
               }}
@@ -180,7 +180,7 @@ const Contact = () => {
 
         {/* Floating command prompts */}
         <motion.div
-          className="absolute top-20 right-1/3 text-purple-400/80 text-md font-mono"
+          className="absolute top-20 right-1/3 text-purple-400/100 text-md font-mono"
           animate={{
             y: [0, -15, 0],
             opacity: [4.5, 3.0, 1.5],
@@ -194,7 +194,7 @@ const Contact = () => {
         </motion.div>
 
         <motion.div
-          className="absolute bottom-1/3 left-8 text-yellow-400/70 text-md font-mono"
+          className="absolute bottom-1/3 left-8 text-yellow-300/100 text-md font-mono"
           animate={{
             scale: [0.9, 1.1, 0.9],
             opacity: [1.8, 0.8, 1.8],
