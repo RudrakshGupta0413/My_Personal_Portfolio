@@ -132,32 +132,34 @@ const Hero = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button
-                  size="lg"
-                  className="glow-effect hover:glow-accent transition-all duration-300 group"
-                >
-                  <span className="mr-2">
-                    <a href="#projects">View My Work</a>
-                  </span>
-                  <motion.div
-                    animate={{ y: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
+                <a href="#projects">
+                  <Button
+                    size="lg"
+                    className="glow-effect hover:glow-accent transition-all duration-300 group"
                   >
-                    <ArrowDown className="h-4 w-4" />
-                  </motion.div>
-                </Button>
+                    <span className="mr-2">View My Work</span>
+                    <motion.div
+                      animate={{ y: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <ArrowDown className="h-4 w-4" />
+                    </motion.div>
+                  </Button>
+                </a>
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="glow-effect hover:bg-secondary/60 hover:text-white"
-                >
-                  <a href="#contact">Get In Touch</a>
-                </Button>
+                <a href="#contact">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="glow-effect hover:bg-secondary/60 hover:text-white"
+                  >
+                    Get In Touch
+                  </Button>
+                </a>
               </motion.div>
             </motion.div>
 
@@ -187,7 +189,7 @@ const Hero = () => {
                 {
                   icon: SiHashnode,
                   href: "https://rudrakshgupta40.hashnode.dev/",
-                  color: "hover:text-neon-blue"
+                  color: "hover:text-neon-blue",
                 },
               ].map((social, index) => (
                 <motion.a
