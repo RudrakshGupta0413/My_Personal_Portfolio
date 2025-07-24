@@ -1,5 +1,11 @@
 import { useState, useRef } from "react";
-import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,10 +15,10 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  
+
   const mouseXSpring = useSpring(x);
   const mouseYSpring = useSpring(y);
-  
+
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["12deg", "-12deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-12deg", "12deg"]);
   const scale = useTransform(mouseXSpring, [-0.5, 0.5], [0.95, 1.05]);
@@ -46,23 +52,23 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      initial={{ 
-        opacity: 0, 
+      initial={{
+        opacity: 0,
         y: 100,
         rotateX: -30,
-        scale: 0.8
+        scale: 0.8,
       }}
-      whileInView={{ 
-        opacity: 1, 
+      whileInView={{
+        opacity: 1,
         y: 0,
         rotateX: 0,
-        scale: 1
+        scale: 1,
       }}
-      transition={{ 
-        duration: 0.8, 
+      transition={{
+        duration: 0.8,
         delay: index * 0.2,
         type: "spring",
-        stiffness: 80
+        stiffness: 80,
       }}
       viewport={{ once: true, margin: "-50px" }}
       className="group relative"
@@ -72,51 +78,53 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
         className="absolute -inset-2 bg-gradient-neon rounded-2xl opacity-0 group-hover:opacity-20 blur-lg"
         transition={{ duration: 0.5 }}
       />
-      
+
       <Card className="relative overflow-hidden glass-effect border-border/30 h-full backdrop-blur-xl">
         <div className="relative overflow-hidden">
           {/* Main project image with parallax effect */}
           <motion.div
             className="relative h-56 overflow-hidden"
             style={{
-              transform: "translateZ(20px)"
+              transform: "translateZ(20px)",
             }}
           >
-            <motion.img 
-              src={project.image} 
+            <motion.img
+              src={project.image}
               alt={project.title}
               className="w-full h-full object-cover"
               style={{
                 scale: scale,
-                transform: "translateZ(10px)"
+                transform: "translateZ(10px)",
               }}
               whileHover={{ scale: 1.15 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             />
-            
+
             {/* Dynamic color overlay based on hover position */}
-            <motion.div 
+            <motion.div
               className="absolute inset-0"
               style={{
-                background: `radial-gradient(circle at ${x.get() * 100 + 50}% ${y.get() * 100 + 50}%, 
-                  hsl(var(--accent) / 0.2) 0%, 
-                  hsl(var(--background) / 0.8) 70%)`
+                background: `linear-gradient(
+    120deg, 
+    hsl(var(--accent) / 0.06) 0%, 
+    hsl(var(--background) / 0.65) 100%
+  )`,
               }}
             />
-            
+
             {/* Animated border lines */}
-            <motion.div 
+            <motion.div
               className="absolute inset-0 border-2 border-transparent"
               whileHover={{
                 borderColor: "hsl(var(--accent) / 0.5)",
-                borderRadius: "0.5rem"
+                borderRadius: "0.5rem",
               }}
               transition={{ duration: 0.3 }}
             />
           </motion.div>
-          
+
           {/* Floating action panel */}
-          <motion.div 
+          <motion.div
             className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             style={{ transform: "translateZ(30px)" }}
           >
@@ -128,18 +136,25 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                 transition={{ delay: 0.1 }}
                 className="group/btn"
               >
-                <Button 
-                  size="sm" 
-                  className="h-10 w-10 p-0 glass-effect border border-accent/30 hover:border-accent hover:bg-accent/20 group-hover/btn:shadow-lg group-hover/btn:shadow-accent/25"
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <motion.div
-                    whileHover={{ rotate: 15 }}
-                    transition={{ duration: 0.2 }}
+                  <Button
+                    size="sm"
+                    className="h-10 w-10 p-0 glass-effect border border-accent/30 hover:border-accent hover:bg-accent/20 group-hover/btn:shadow-lg group-hover/btn:shadow-accent/25"
                   >
-                    <ExternalLink className="h-4 w-4" />
-                  </motion.div>
-                </Button>
+                    <motion.div
+                      whileHover={{ rotate: 15 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </motion.div>
+                  </Button>
+                </a>
               </motion.div>
+
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 whileHover={{ y: 0, opacity: 1, scale: 1.1 }}
@@ -147,48 +162,54 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                 transition={{ delay: 0.2 }}
                 className="group/btn"
               >
-                <Button 
-                  size="sm" 
-                  className="h-10 w-10 p-0 glass-effect border border-accent/30 hover:border-accent hover:bg-accent/20 group-hover/btn:shadow-lg group-hover/btn:shadow-accent/25"
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <motion.div
-                    whileHover={{ rotate: -15 }}
-                    transition={{ duration: 0.2 }}
+                  <Button
+                    size="sm"
+                    className="h-10 w-10 p-0 glass-effect border border-accent/30 hover:border-accent hover:bg-accent/20 group-hover/btn:shadow-lg group-hover/btn:shadow-accent/25"
                   >
-                    <Github className="h-4 w-4" />
-                  </motion.div>
-                </Button>
+                    <motion.div
+                      whileHover={{ rotate: -15 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Github className="h-4 w-4" />
+                    </motion.div>
+                  </Button>
+                </a>
               </motion.div>
             </div>
           </motion.div>
-          
+
           {/* Animated particle effect */}
           <motion.div
             className="absolute top-4 left-4 w-2 h-2 bg-accent rounded-full opacity-0 group-hover:opacity-100"
             animate={{
               scale: [1, 1.5, 1],
-              opacity: [0.5, 1, 0.5]
+              opacity: [0.5, 1, 0.5],
             }}
             transition={{
               duration: 2,
               repeat: Infinity,
-              delay: index * 0.3
+              delay: index * 0.3,
             }}
           />
         </div>
-        
+
         {/* Content section with enhanced animations */}
-        <motion.div 
+        <motion.div
           className="p-6 relative"
           style={{ transform: "translateZ(40px)" }}
         >
           {/* Floating title with magnetic effect */}
-          <motion.h3 
+          <motion.h3
             className="text-xl font-bold mb-3 group-hover:text-accent transition-colors duration-300 relative"
-            whileHover={{ 
+            whileHover={{
               x: mouseXSpring.get() * 10,
               y: mouseYSpring.get() * 5,
-              transition: { type: "spring", stiffness: 300 }
+              transition: { type: "spring", stiffness: 300 },
             }}
           >
             {project.title}
@@ -200,19 +221,19 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               transition={{ duration: 0.3 }}
             />
           </motion.h3>
-          
-          <motion.p 
+
+          <motion.p
             className="text-muted-foreground text-sm mb-6 leading-relaxed"
-            whileHover={{ 
+            whileHover={{
               color: "hsl(var(--foreground))",
-              transition: { duration: 0.3 }
+              transition: { duration: 0.3 },
             }}
           >
             {project.description}
           </motion.p>
-          
+
           {/* Enhanced tech stack with staggered reveal */}
-          <motion.div 
+          <motion.div
             className="flex flex-wrap gap-2"
             initial="hidden"
             whileInView="visible"
@@ -220,9 +241,9 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               hidden: {},
               visible: {
                 transition: {
-                  staggerChildren: 0.1
-                }
-              }
+                  staggerChildren: 0.1,
+                },
+              },
             }}
           >
             {project.tech.map((tech: string, techIndex: number) => (
@@ -230,18 +251,18 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
                 key={tech}
                 variants={{
                   hidden: { opacity: 0, scale: 0, y: 20 },
-                  visible: { opacity: 1, scale: 1, y: 0 }
+                  visible: { opacity: 1, scale: 1, y: 0 },
                 }}
-                whileHover={{ 
-                  scale: 1.15, 
+                whileHover={{
+                  scale: 1.15,
                   y: -4,
                   boxShadow: "0 4px 20px hsl(var(--accent) / 0.3)",
-                  transition: { duration: 0.2 }
+                  transition: { duration: 0.2 },
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Badge 
-                  variant="secondary" 
+                <Badge
+                  variant="secondary"
                   className="text-xs glass-effect border-border/50 hover:border-accent/50 hover:bg-accent/10 cursor-pointer"
                 >
                   {tech}
@@ -260,57 +281,111 @@ const Projects = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const projects = [
     {
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with real-time inventory, payment integration, and admin dashboard. Built for scalability and performance.",
-      tech: ["React", "Node.js", "PostgreSQL", "Stripe", "AWS"],
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+      title: "Reels Pro App (Coming Soon)",
+      description:
+        "A scalable full-stack short video platform with secure auth, public feeds, video uploads via ImageKit, user profiles with privacy controls, and real-time performance powered by Redis. Built for scalability and performance",
+      tech: [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "shadcn/ui",
+        "MongoDB",
+        "Redis",
+        "ImageKit",
+        "NextAuth",
+      ],
+      image:
+        "/project6.png",
       liveUrl: "#",
-      githubUrl: "#"
+      githubUrl: "#",
     },
     {
-      title: "Task Management App",
-      description: "Collaborative project management tool with real-time updates, team collaboration features, and detailed analytics.",
-      tech: ["Next.js", "TypeScript", "Supabase", "Tailwind"],
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=400&fit=crop",
-      liveUrl: "#",
-      githubUrl: "#"
+      title: "PingPanda: SaaS Event Monitoring App",
+      description:
+        "PingPanda is a real-time SaaS event monitoring app featuring a user-friendly dashboard, instant Discord alerts for categorized events, Clerk authentication, Stripe billing, and scalable performance powered by Redis and rate limiting.",
+      tech: [
+        "Next.js",
+        "TypeScript",
+        "PostgreSQL",
+        "Tailwind CSS",
+        "Clerk",
+        "Discord",
+        "Redis",
+        "shadcn/ui",
+        "Stripe",
+      ],
+      image: "/project1.png",
+      liveUrl: "https://ping-panda-ai-saa-s-monitoring-plat.vercel.app/",
+      githubUrl:
+        "https://github.com/RudrakshGupta0413/PingPanda_AI_SaaS_Monitoring_Platform",
     },
     {
-      title: "AI Content Generator",
-      description: "SaaS platform leveraging AI to generate marketing content, blogs, and social media posts with custom brand voice.",
-      tech: ["React", "Python", "OpenAI", "FastAPI", "Docker"],
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
-      liveUrl: "#",
-      githubUrl: "#"
+      title: "My Personal Portfolio",
+      description:
+        "Built with React.js, Framer Motion, and Tailwind CSS, my portfolio features advanced motion animations, a real-time Slack notification system integrated with the contact form, and automated email delivery for instant communication.",
+      tech: [
+        "React.js",
+        "Typescript",
+        "Tailwind CSS",
+        "shadcn/ui",
+        "Framer Motion",
+        "Slack",
+      ],
+      image: "/project2.png",
+      liveUrl: "https://my-personal-portfolio-livid-phi.vercel.app/",
+      githubUrl: "#",
     },
     {
-      title: "Real Estate Platform",
-      description: "Modern property listing platform with advanced search, virtual tours, and mortgage calculator integration.",
-      tech: ["Vue.js", "Laravel", "MySQL", "Mapbox"],
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop",
-      liveUrl: "#",
-      githubUrl: "#"
+      title: "Saas Landing Page",
+      description:
+        "Pixel-perfect SaaS landing page built with React, Next.js, Tailwind CSS & Framer Motion—featuring advanced animations, drag-and-drop UI, and smooth interactive effects.",
+      tech: ["React.js", "Next.js", "Framer Motion", "Tailwind CSS"],
+      image: "/project3.png",
+      liveUrl: "https://saas-landing-page-layers-rho.vercel.app/",
+      githubUrl:
+        "https://github.com/RudrakshGupta0413/Saas-Landing-Page-Layers",
     },
     {
-      title: "Fitness Tracking App",
-      description: "Mobile-first fitness application with workout tracking, nutrition planning, and social features for community engagement.",
-      tech: ["React Native", "Firebase", "Redux", "Stripe"],
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
-      liveUrl: "#",
-      githubUrl: "#"
+      title: "Ruchi Art House Branding Website",
+      description:
+        "Custom branding website for Ruchi Art House featuring a dynamic gallery, service showcase, and real-time WhatsApp-based order system for seamless client interaction.",
+      tech: [
+        "Next.js",
+        "JavaScript",
+        "Tailwind CSS",
+        "Figma",
+        "Framer Motion",
+        "Analytics",
+        "WhatsApp",
+      ],
+      image: "/project4.png",
+      liveUrl: "https://www.ruchiarthouse.com/",
+      githubUrl: "#",
     },
     {
-      title: "Analytics Dashboard",
-      description: "Comprehensive business intelligence dashboard with real-time data visualization and custom reporting capabilities.",
-      tech: ["React", "D3.js", "Node.js", "MongoDB", "Redis"],
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+      title: "Amexus AI Supply Chain AI Voice Assistant",
+      description:
+        "Developed a supply chain web app at Amexus AI with a voice-enabled assistant using Next.js, ElevenLabs, and FastAPI—enabling real-time multi-vendor communication through AI-driven voice interactions.",
+      tech: [
+        "Next.js",
+        "FastAPI",
+        "JavaScript",
+        "Python",
+        "Eleven Labs",
+        "Tailwind CSS",
+      ],
+      image: "/project5.png",
       liveUrl: "#",
-      githubUrl: "#"
-    }
+      githubUrl: "https://github.com/RudrakshGupta0413/AmexusAI-DEmo",
+    },
   ];
 
   return (
-    <section id="projects" className="py-20 px-6 relative overflow-hidden" ref={ref}>
+    <section
+      id="projects"
+      className="py-20 px-6 relative overflow-hidden"
+      ref={ref}
+    >
       {/* Code Matrix Background Animation */}
       <div className="absolute inset-0 opacity-10 pointer-events-none overflow-hidden">
         {/* Binary code streams */}
@@ -319,11 +394,11 @@ const Projects = () => {
             key={i}
             className="absolute text-green-400 font-mono text-xs leading-3"
             style={{
-              left: `${(i * 8) + Math.random() * 10}%`,
+              left: `${i * 8 + Math.random() * 10}%`,
               top: -20,
             }}
             animate={{
-              y: ['0vh', '120vh'],
+              y: ["0vh", "120vh"],
             }}
             transition={{
               duration: 15 + Math.random() * 10,
@@ -333,13 +408,13 @@ const Projects = () => {
             }}
           >
             {Array.from({ length: 30 }).map((_, j) => (
-              <div key={j} style={{ marginBottom: '8px' }}>
-                {Math.random() > 0.5 ? '1' : '0'}
+              <div key={j} style={{ marginBottom: "8px" }}>
+                {Math.random() > 0.5 ? "1" : "0"}
               </div>
             ))}
           </motion.div>
         ))}
-        
+
         {/* Floating code brackets */}
         <motion.div
           className="absolute top-1/4 left-10 text-blue-400/30 text-6xl font-mono"
@@ -350,12 +425,12 @@ const Projects = () => {
           transition={{
             duration: 20,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
-          {'{ }'}
+          {"{ }"}
         </motion.div>
-        
+
         <motion.div
           className="absolute bottom-1/4 right-20 text-purple-400/30 text-8xl font-mono"
           animate={{
@@ -365,12 +440,12 @@ const Projects = () => {
           transition={{
             duration: 15,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         >
           &lt;/&gt;
         </motion.div>
-        
+
         {/* Animated circuit lines */}
         <svg className="absolute inset-0 w-full h-full">
           <motion.path
@@ -386,7 +461,7 @@ const Projects = () => {
             transition={{
               duration: 2,
               repeat: Infinity,
-              ease: "linear"
+              ease: "linear",
             }}
           />
           <motion.path
@@ -402,11 +477,11 @@ const Projects = () => {
             transition={{
               duration: 3,
               repeat: Infinity,
-              ease: "linear"
+              ease: "linear",
             }}
           />
         </svg>
-        
+
         {/* Git commit visualization */}
         <motion.div
           className="absolute top-1/2 right-1/4 w-3 h-3 bg-green-400 rounded-full opacity-50"
@@ -434,30 +509,31 @@ const Projects = () => {
       </div>
 
       <div className="container mx-auto relative z-10">
-        <motion.div 
+        <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <motion.h2 
+          <motion.h2
             className="text-4xl lg:text-6xl font-bold gradient-text mb-6"
-            whileInView={{ 
+            whileInView={{
               scale: [0.9, 1],
-              opacity: [0, 1]
+              opacity: [0, 1],
             }}
             transition={{ duration: 0.8 }}
           >
             Project Showcase
           </motion.h2>
-          <motion.p 
+          <motion.p
             className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Each project represents a unique challenge solved through innovative thinking, 
-            cutting-edge technology, and meticulous attention to detail
+            Each project represents a unique challenge solved through innovative
+            thinking, cutting-edge technology, and meticulous attention to
+            detail
           </motion.p>
         </motion.div>
 
@@ -468,13 +544,15 @@ const Projects = () => {
               key={project.title}
               initial={{ opacity: 0, y: 100 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ 
-                duration: 0.8, 
+              transition={{
+                duration: 0.8,
                 delay: index * 0.15,
                 type: "spring",
-                stiffness: 100
+                stiffness: 100,
               }}
-              className={`${index % 3 === 1 ? 'xl:mt-12' : ''} ${index % 3 === 2 ? 'xl:mt-24' : ''}`}
+              className={`${index % 3 === 1 ? "xl:mt-12" : ""} ${
+                index % 3 === 2 ? "xl:mt-24" : ""
+              }`}
             >
               <ProjectCard project={project} index={index} />
             </motion.div>
@@ -482,7 +560,7 @@ const Projects = () => {
         </div>
 
         {/* Call to action with enhanced animation */}
-        <motion.div 
+        <motion.div
           className="text-center mt-20"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -493,8 +571,11 @@ const Projects = () => {
             whileTap={{ scale: 0.95 }}
             className="inline-block"
           >
-            <Button 
-              size="lg" 
+            <Button
+              onClick={() =>
+                window.open("https://github.com/RudrakshGupta0413", "_blank")
+              }
+              size="lg"
               className="glass-effect border border-accent/30 hover:border-accent hover:bg-accent/10 group px-8 py-6 text-lg relative overflow-hidden"
             >
               {/* Button background animation */}
@@ -504,18 +585,18 @@ const Projects = () => {
                 whileHover={{ scale: 1, rotate: 0 }}
                 transition={{ duration: 0.5 }}
               />
-              
+
               <span className="relative z-10 mr-3">Explore All Projects</span>
               <motion.div
                 className="relative z-10"
-                animate={{ 
+                animate={{
                   x: [0, 5, 0],
-                  rotate: [0, 15, 0]
+                  rotate: [0, 15, 0],
                 }}
-                transition={{ 
-                  duration: 2, 
+                transition={{
+                  duration: 2,
                   repeat: Infinity,
-                  ease: "easeInOut"
+                  ease: "easeInOut",
                 }}
               >
                 <ExternalLink className="h-5 w-5" />
