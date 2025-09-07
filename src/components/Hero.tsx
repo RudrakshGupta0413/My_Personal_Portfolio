@@ -3,7 +3,7 @@ import { color, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 // Using the uploaded image directly
 const developerPhoto =
-  "/lovable-uploads/527e4f40-1c8f-4c3f-b934-cf5361a2627d.png";
+  "/lovable-uploads/Portfolio-image.jpg";
 import ParticleBackground from "./ParticleBackground";
 import CodeSnippets from "./CodeSnippets";
 import { SiHashnode } from "react-icons/si";
