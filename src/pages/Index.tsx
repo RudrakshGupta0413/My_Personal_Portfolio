@@ -8,12 +8,14 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingNav from "@/components/FloatingNav";
 import MobileNav from "@/components/MobileNav";
+import AIChatbot from "@/components/AIChatbot";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background relative">
       <FloatingNav />
       <MobileNav />
+      <AIChatbot />
       <Hero />
       <About />
       <Skills />
