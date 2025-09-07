@@ -11,7 +11,16 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-const ProjectCard = ({ project, index }: { project: any; index: number }) => {
+type Project = {
+  title: string;
+  description: string;
+  tech: string[];
+  image: string;
+  liveUrl: string;
+  githubUrl: string;
+};
+
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -291,6 +300,8 @@ const Projects = () => {
         "MongoDB",
         "Redis",
         "ImageKit",
+        "Cloudinary",
+        "ElasticSearch",
         "NextAuth",
       ],
       image:
