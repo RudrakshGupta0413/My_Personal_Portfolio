@@ -164,7 +164,7 @@ const Hero = () => {
             </motion.div>
 
             {/* Social Links */}
-            <motion.div
+            {/* <motion.div
               className="flex gap-6 justify-center lg:justify-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -204,7 +204,7 @@ const Hero = () => {
                   <social.icon className="h-6 w-6 group-hover:drop-shadow-[0_0_8px_currentColor]" />
                 </motion.a>
               ))}
-            </motion.div>
+            </motion.div> */}
           </motion.div>
 
           {/* Profile Image */}
