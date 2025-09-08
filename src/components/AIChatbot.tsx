@@ -34,39 +34,8 @@ const AIChatbot = () => {
     scrollToBottom();
   }, [messages]);
 
-  // Sample responses for common questions
-  const getBotResponse = (userMessage: string): string => {
-    const message = userMessage.toLowerCase();
-    
-    if (message.includes("skill") || message.includes("technology") || message.includes("tech")) {
-      return "Rudraksh specializes in full-stack development with expertise in React, Next.js, Node.js, TypeScript, Python, and modern databases like MongoDB and PostgreSQL. He's also experienced with cloud platforms, DevOps tools, and modern development practices.";
-    }
-    
-    if (message.includes("project") || message.includes("work") || message.includes("portfolio")) {
-      return "Rudraksh has worked on various impressive projects including SaaS applications, e-commerce platforms, and AI-powered tools. His notable projects include real-time collaboration tools, modern web applications with advanced features, and scalable backend systems. Check out the Projects section for detailed information!";
-    }
-    
-    if (message.includes("experience") || message.includes("background")) {
-      return "Rudraksh is a passionate full-stack developer with experience in building modern web applications. He has expertise in both frontend and backend development, with a focus on creating scalable, user-friendly solutions using cutting-edge technologies.";
-    }
-    
-    if (message.includes("contact") || message.includes("hire") || message.includes("collaborate")) {
-      return "You can reach out to Rudraksh through the contact form on this website, or connect via LinkedIn (linkedin.com/in/rudraksh-gupta-664b591b2/) or email (rudrakshgupta40@gmail.com). He's always open to discussing new opportunities and collaborations!";
-    }
-    
-    if (message.includes("blog") || message.includes("article") || message.includes("writing")) {
-      return "Rudraksh shares his knowledge through technical blogs on Hashnode (rudrakshgupta40.hashnode.dev). He writes about web development, best practices, and emerging technologies. Check out the Blogs section for his latest articles!";
-    }
-    
-    if (message.includes("hello") || message.includes("hi") || message.includes("hey")) {
-      return "Hello! Great to meet you! I'm here to help you learn more about Rudraksh's work and expertise. What specific information are you looking for?";
-    }
-    
-    return "That's an interesting question! For detailed information about Rudraksh's work, skills, and projects, I'd recommend exploring the different sections of this portfolio. If you have specific questions about his experience or want to get in touch, feel free to ask!";
-  };
-
   const handleSendMessage = async () => {
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || isTyping) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -79,18 +48,44 @@ const AIChatbot = () => {
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate bot typing delay
-    setTimeout(() => {
+    try {
+      // Make a POST request to your new API endpoint
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // Send the user's message in the request body
+        body: JSON.stringify({ message: userMessage.text }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok.");
+      }
+
+      const data = await response.json();
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: getBotResponse(inputValue),
+        text: data.response, // The response from your Vercel function
         isBot: true,
         timestamp: new Date(),
       };
       
       setMessages(prev => [...prev, botResponse]);
+
+    } catch (error) {
+      console.error("Failed to fetch from API:", error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I'm sorry, my systems are currently offline. Please try again later.",
+        isBot: true,
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, errorMessage]);
+      
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -106,7 +101,7 @@ const AIChatbot = () => {
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="fixed right-6 bottom-32 z-50"
+        className="fixed right-8 bottom-64 z-50"
       >
         <motion.button
           onClick={() => setIsOpen(true)}
