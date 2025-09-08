@@ -1,10 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// Configure the Google AI client with your API key
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 
-// The 'system' message needs to be included as the first 'user' message in the chat history
-// for models like Gemini 1.0 Pro. This gives the AI context about you.
 const systemPrompt = `You are a helpful AI assistant for Rudraksh Gupta's portfolio website. Your purpose is to provide information about Rudraksh Gupta based on the provided context. Be friendly and professional.
 
 **About Rudraksh:**
@@ -18,20 +15,19 @@ Please answer questions about Rudraksh based *only* on the provided information.
 
 // The main function to handle requests
 export default async function handler(req, res) {
-  // Only allow POST requests for security
+
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 
-  // Get the message from the request body sent from your React app
+ 
   const { message } = req.body;
 
   try {
-    // For conversational models, Gemini uses startChat() to maintain context.
-    // The system prompt is passed as a first message in the history.
-    const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
+    
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-    // Initialize the chat session
+    // Initializing the chat session
     const chat = model.startChat({
         history: [{
             role: "user",

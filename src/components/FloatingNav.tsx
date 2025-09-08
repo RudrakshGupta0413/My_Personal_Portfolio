@@ -93,7 +93,7 @@ const FloatingNav = () => {
             <item.icon className="h-5 w-5" />
 
             {/* Tooltip */}
-            <div className="absolute left-full ml-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="absolute ml-3 top-1 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               <div className="bg-background border border-border rounded-lg px-3 py-1 text-sm whitespace-nowrap">
                 {item.label}
               </div>
