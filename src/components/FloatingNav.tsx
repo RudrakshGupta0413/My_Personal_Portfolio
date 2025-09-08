@@ -74,10 +74,10 @@ const FloatingNav = () => {
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: 1 }}
-      className="fixed right-6 top-3/4 transform -translate-y-1/2 z-50 hidden lg:flex flex-col gap-4"
+      className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 hidden lg:flex flex-row gap-4"
     >
       {/* Navigation */}
-      <div className="glass-effect glow-effect rounded-full p-2 space-y-2">
+      <div className="glass-effect glow-effect rounded-full p-2 flex space-x-2">
         {navItems.map((item) => (
           <motion.button
             key={item.id}
@@ -93,7 +93,7 @@ const FloatingNav = () => {
             <item.icon className="h-5 w-5" />
 
             {/* Tooltip */}
-            <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+            <div className="absolute left-full ml-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               <div className="bg-background border border-border rounded-lg px-3 py-1 text-sm whitespace-nowrap">
                 {item.label}
               </div>
@@ -103,7 +103,7 @@ const FloatingNav = () => {
       </div>
 
       {/* Social Links - Horizontal */}
-      <div className="glass-effect rounded-full p-2 flex space-x-2">
+      {/* <div className="glass-effect rounded-full p-2 flex space-x-2">
         {socialItems.map((item, index) => (
           <motion.a
             key={index}
@@ -116,7 +116,7 @@ const FloatingNav = () => {
           >
             <item.icon className="h-4 w-4" />
 
-            {/* Tooltip */}
+        
             <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               <div className="bg-background border border-border rounded-lg px-3 py-1 text-sm whitespace-nowrap">
                 {item.label}
@@ -124,7 +124,7 @@ const FloatingNav = () => {
             </div>
           </motion.a>
         ))}
-      </div>
+      </div> */}
     </motion.div>
   );
 };

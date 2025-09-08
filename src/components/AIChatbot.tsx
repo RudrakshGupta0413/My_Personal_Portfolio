@@ -101,7 +101,7 @@ const AIChatbot = () => {
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="fixed right-8 bottom-64 z-50"
+        className="fixed right-8 bottom-6 z-50"
       >
         <motion.button
           onClick={() => setIsOpen(true)}
