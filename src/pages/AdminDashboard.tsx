@@ -18,9 +18,9 @@ const AdminDashboard = () => {
     );
   }
 
-  // if (!user || !profile?.is_admin) {
-  //   return <Navigate to="/auth" replace />;
-  // }
+  if (!user || !profile?.is_admin) {
+    return <Navigate to="/auth" replace />;
+  }
 
   return (
     <div className="min-h-screen bg-background">
