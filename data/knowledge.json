@@ -1,0 +1,85 @@
+[
+  {
+    "id": "rudraksh_gupta_overview",
+    "title": "About Rudraksh Gupta",
+    "summary": "I am a full-stack developer with experience in Java, JavaScript, TypeScript, and Python. I have expertise in technologies like React.js, Next.js, Node.js, and various databases. I have worked on developing and deploying client web applications and AI chatbot UIs, and am proficient in system design concepts like API design and microservices. I am a Computer Science and Engineering student at Dehradun Institute of Technology.",
+    "contact": {
+      "phone": "+91 6396883674",
+      "email": "rudrakshgupta40@gmail.com",
+      "location": "Dehradun",
+      "links": ["Github", "LinkedIn", "Portfolio", "Leetcode"]
+    },
+    "skills": {
+      "languages": ["Java", "JavaScript", "TypeScript", "Python", "SQL"],
+      "technologies": ["HTML", "CSS", "Tailwind CSS", "React.js", "Next.js", "Node.js", "Express", "PostgreSQL", "MongoDB", "Redis", "Framer Motion"],
+      "system_design_architecture": ["API Design", "Caching Strategies", "Rate Limiting", "Load Balancing", "Microservices", "Database Optimization"],
+      "tools_platform": ["Git", "GitHub", "Postman", "Docker", "Linux", "AWS (S3, Lambda)", "ElevenLabs"]
+    }
+  },
+  {
+    "id": "work_freelance",
+    "title": "Freelance Full Stack Developer",
+    "company": "Remote",
+    "dates": "January 2024 - Present",
+    "responsibilities": [
+      "Developed and deployed three comprehensive client web applications, showcasing proficiency in end-to-end full-stack development.",
+      "Designed and optimized end-to-end architecture with secure authentication, scalable databases, and REST APIs, improving overall app performance by 25%."
+    ],
+    "technologies": ["Next.js", "React.js", "Tailwind CSS", "MongoDB", "PostgreSQL", "Git"]
+  },
+  {
+    "id": "work_amexus",
+    "title": "Full Stack Developer",
+    "company": "Amexus AI (Remote)",
+    "dates": "February 2025 - June 2025",
+    "responsibilities": [
+      "Built and deployed 5+ responsive web applications and AI chatbot UIs using React.js, Next.js, and Tailwind CSS, which resulted in a 30% improvement in load time.",
+      "Integrated advanced voice agents with ElevenLabs and Voiceflow, enhancing user interaction for over 1000 sessions.",
+      "Collaborated cross-functionally to ensure the on-time delivery of high-quality, scalable features for all projects."
+    ],
+    "technologies": ["Next.js", "React.js", "Tailwind CSS", "Git", "Framer Motion", "ElevenLabs"]
+  },
+  {
+    "id": "project_ping_panda",
+    "title": "Ping Panda - SaaS Event Monitoring Platform",
+    "description": "Engineered a real-time SaaS monitoring system with Discord webhook, reducing incident response time by 35%. The platform features secure role-based subscriptions for over 50 users using Clerk auth and Stripe billing. The backend was optimized with Redis caching, which cut API latency by 40%. I also developed a responsive admin dashboard using Next.js and Tailwind CSS.",
+    "tech_stack": ["Next.js", "Tailwind CSS", "TypeScript", "Clerk", "Stripe", "Discord Webhooks", "PostgreSQL", "Redis"]
+  },
+  {
+    "id": "project_reels_pro",
+    "title": "Reels Pro App - Short Video Sharing Platform",
+    "description": "Developed a scalable short video-sharing platform (Instagram-style) using Next.js, TypeScript, and Tailwind CSS, supporting over 100 concurrent users with public/private video uploads and real-time updates. I integrated NextAuth, MongoDB, ImageKit, Cloudinary, and Redis for secure authentication, media handling, and scalability. A rate limiter was implemented to handle over 1000 requests per day, improving user retention by 20%.",
+    "tech_stack": ["TypeScript", "Next.js", "Tailwind CSS", "MongoDB", "ImageKit", "Cloudinary", "NextAuth", "Redis"]
+  },
+  {
+    "id": "project_portfolio_website",
+    "title": "Personal Portfolio Website",
+    "description": "Created a responsive, animated portfolio using React.js, Tailwind CSS, and Framer Motion, showcasing over 10 projects, blogs, and freelance work. It includes a real-time contact form with Slack alerts and automated emails for instant client communication. A custom AI assistant was also added using the Gemini API to handle basic inquiries, boosting engagement by 25%.",
+    "tech_stack": ["React.js", "Tailwind CSS", "Framer Motion", "Gemini API"]
+  },
+  {
+    "id": "education_certifications",
+    "title": "Education and Certifications",
+    "education": {
+      "degree": "Bachelor of Technology in Computer Science and Engineering",
+      "university": "Dehradun Institute Of Technology, Dehradun",
+      "cgpa": "7.0/10",
+      "year_range": "2022-2026"
+    },
+    "certifications": [
+      "The Complete 2024 Web Development Bootcamp By Angela Yu - Udemy",
+      "Beginner Full Stack Web Development: HTML, CSS, React & Node - Udemy"
+    ],
+    "additional_details": [
+      {
+        "role": "Vice-Chairperson, Association For Computing Machinery DITU",
+        "dates": "September 2023 - Present",
+        "responsibilities": "Directed a team of developers, orchestrated a 24-hour hackathon, and conducted technical workshops under ACM."
+      },
+      {
+        "role": "Technical Team Head, DIT University Technical Team",
+        "responsibilities": "Organized and managed 5+ major college events."
+      }
+    ]
+  }
+]
