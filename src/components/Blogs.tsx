@@ -1,48 +1,71 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Calendar, Clock, ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { supabase } from "@/integrations/supabase/client";
 
 const Blogs = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [blogPosts, setBlogPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const blogPosts = [
-    {
-      id: 1,
-      title: "From React.js to Next.js: Elevate Your Web Development Game",
-      excerpt:
-        "Discover how transitioning from React.js to Next.js can supercharge your web development workflow with features like server-side rendering, API routes, and built-in performance optimization.",
-      date: "2024-06-04",
-      readTime: "6 min read",
-      tags: ["React", "Next.js", "Web Development", "Full Stack Development"],
-      url: "https://rudrakshgupta40.hashnode.dev/from-reactjs-to-nextjs-elevate-your-web-development-game",
-      image: "/blog1.png",
-    },
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const { data, error } = await supabase
+          .from("blogs")
+          .select("*")
+          .eq("status", "published")
+          .order("published_at", { ascending: false })
+          .limit(6);
 
-    {
-      id: 2,
-      title: "How to start with React.js: A Simple Guide for Beginners",
-      excerpt:
-        "A beginner-friendly guide to help you get started with React.js. Learn the core concepts, project setup, and how to build your first interactive UI components step by step.",
-      date: "2024-06-07",
-      readTime: "5 min read",
-      tags: ["React", "Web Development", "Javascript"],
-      url: "https://rudrakshgupta40.hashnode.dev/how-to-start-with-reactjs-a-simple-guide-for-beginners",
-      image: "/blog2.png",
-    },
-    {
-      id: 3,
-      title: "Discover HTMX: Revolutionizing Modern Web Development",
-      excerpt:
-        "Explore how HTMX is transforming modern web development by enabling dynamic, interactive user experiences using standard HTML—without relying heavily on JavaScript frameworks.",
-      date: "2024-06-22",
-      readTime: "6 min read",
-      tags: ["HTMX", "HTML5", "Frontend", "Web Development"],
-      url: "https://rudrakshgupta40.hashnode.dev/discover-htmx-revolutionizing-modern-web-development",
-      image: "/blog3.png",
-    },
-  ];
+        if (error) {
+          console.error("Error fetching blogs:", error);
+          // Fallback to static data
+          setBlogPosts([
+            {
+              id: 1,
+              title: "From React.js to Next.js: Elevate Your Web Development Game",
+              excerpt: "Discover how transitioning from React.js to Next.js can supercharge your web development workflow with features like server-side rendering, API routes, and built-in performance optimization.",
+              published_at: "2024-06-04",
+              read_time: 6,
+              tags: ["React", "Next.js", "Web Development", "Full Stack Development"],
+              featured_image: "/blog1.png",
+            },
+            {
+              id: 2,
+              title: "How to start with React.js: A Simple Guide for Beginners",
+              excerpt: "A beginner-friendly guide to help you get started with React.js. Learn the core concepts, project setup, and how to build your first interactive UI components step by step.",
+              published_at: "2024-06-07",
+              read_time: 5,
+              tags: ["React", "Web Development", "Javascript"],
+              featured_image: "/blog2.png",
+            },
+            {
+              id: 3,
+              title: "Discover HTMX: Revolutionizing Modern Web Development",
+              excerpt: "Explore how HTMX is transforming modern web development by enabling dynamic, interactive user experiences using standard HTML—without relying heavily on JavaScript frameworks.",
+              published_at: "2024-06-22",
+              read_time: 6,
+              tags: ["HTMX", "HTML5", "Frontend", "Web Development"],
+              featured_image: "/blog3.png",
+            },
+          ]);
+        } else {
+          setBlogPosts(data || []);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -180,13 +203,41 @@ const Blogs = () => {
         </motion.div>
 
         {/* Blog Grid */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-        >
-          {blogPosts.map((post, index) => (
+        {loading ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {[1, 2, 3].map((i) => (
+              <Card key={i} className="glass-effect border-white/20 animate-pulse">
+                <div className="h-48 bg-muted rounded-t-2xl"></div>
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex justify-between">
+                    <div className="h-4 bg-muted rounded w-24"></div>
+                    <div className="h-4 bg-muted rounded w-16"></div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-6 bg-muted rounded w-3/4"></div>
+                    <div className="h-4 bg-muted rounded"></div>
+                    <div className="h-4 bg-muted rounded w-5/6"></div>
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="h-6 bg-muted rounded w-16"></div>
+                    <div className="h-6 bg-muted rounded w-20"></div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : blogPosts.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No blog posts available yet.</p>
+          </div>
+        ) : (
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+          >
+            {blogPosts.map((post, index) => (
             <motion.article
               key={post.id}
               variants={cardVariants}
@@ -235,13 +286,17 @@ const Blogs = () => {
                       repeat: Infinity,
                       delay: index * 0.5,
                     }}
-                  >
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
+                    >
+                      {post.featured_image ? (
+                        <img
+                          src={post.featured_image}
+                          alt={post.title}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="text-6xl">📝</div>
+                      )}
+                    </motion.div>
 
                   {/* Floating particles */}
                   {[...Array(3)].map((_, i) => (
@@ -271,11 +326,11 @@ const Blogs = () => {
                   <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
                     <div className="flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
-                      <span>{new Date(post.date).toLocaleDateString()}</span>
+                      <span>{new Date(post.published_at || post.created_at).toLocaleDateString()}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       <Clock className="h-3 w-3" />
-                      <span>{post.readTime}</span>
+                      <span>{post.read_time} min read</span>
                     </div>
                   </div>
 
@@ -306,25 +361,16 @@ const Blogs = () => {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 1 + index * 0.1 }}
                   >
-                    {post.tags.map((tag, tagIndex) => (
-                      <motion.span
-                        key={tag}
-                        className="px-2 py-1 text-xs bg-secondary/50 text-accent rounded-full border border-accent/20"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                        transition={{
-                          delay: 1.2 + index * 0.1 + tagIndex * 0.05,
-                        }}
-                        whileHover={{ scale: 1.1 }}
-                      >
+                    {post.tags?.map((tag: string, tagIndex: number) => (
+                      <Badge key={tag} variant="secondary" className="text-xs">
                         {tag}
-                      </motion.span>
+                      </Badge>
                     ))}
                   </motion.div>
 
                   {/* Read More Button */}
                   <motion.div
-                    className="flex items-center gap-2 text-accent text-sm font-medium group-hover:text-accent-foreground transition-colors"
+                    className="flex items-center gap-2 text-accent text-sm font-medium group-hover:text-accent-foreground transition-colors cursor-pointer"
                     whileHover={{ x: 5 }}
                   >
                     <span>Read More</span>
@@ -346,8 +392,9 @@ const Blogs = () => {
                 </motion.div>
               </motion.div>
             </motion.article>
-          ))}
-        </motion.div>
+            ))}
+          </motion.div>
+        )}
 
         {/* Call to Action */}
         <motion.div
