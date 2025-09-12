@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Calendar, Clock, ArrowRight, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,6 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 const Blogs = () => {
   const ref = useRef(null);
+  const navigate = useNavigate();
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [blogPosts, setBlogPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -260,7 +262,7 @@ const Blogs = () => {
                   boxShadow: "0 20px 40px hsl(var(--accent) / 0.1)",
                   borderColor: "hsl(var(--accent) / 0.3)",
                 }}
-                onClick={() => window.open(post.url, "_blank")}
+                onClick={() => navigate(`/blog/${post.id}`)}
               >
                 {/* Background gradient */}
                 <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

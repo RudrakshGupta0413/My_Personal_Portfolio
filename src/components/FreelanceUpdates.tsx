@@ -61,8 +61,45 @@ const FreelanceUpdates = () => {
     fetchUpdates();
   }, []);
 
-  if (loading || updates.length === 0) {
-    return null;
+  // Don't render if loading or no updates
+  if (loading) {
+    return (
+      <section id="freelance-updates" ref={ref} className="py-20 relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+              <span className="text-primary font-medium text-sm">Latest Updates</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Freelance Journey
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Loading updates...
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (updates.length === 0) {
+    return (
+      <section id="freelance-updates" ref={ref} className="py-20 relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+              <span className="text-primary font-medium text-sm">Latest Updates</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+              Freelance Journey
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              No updates available at the moment. Check back soon!
+            </p>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   const containerVariants = {
