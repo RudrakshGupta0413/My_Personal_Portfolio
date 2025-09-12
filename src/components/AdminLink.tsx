@@ -12,7 +12,7 @@ const AdminLink = () => {
 
   return (
     <Link to="/admin">
-      <Button variant="outline" size="sm" className="fixed bottom-4 right-4 z-50">
+      <Button variant="outline" size="sm" className="fixed top-4 right-4 z-50">
         <Settings className="h-4 w-4 mr-2" />
         Admin
       </Button>
