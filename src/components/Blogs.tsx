@@ -275,30 +275,32 @@ const Blogs = () => {
                   transition={{ duration: 0.8 }}
                 />
 
-                {/* Blog Image Placeholder */}
-                <div className="relative h-48 bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
-                  <motion.div
-                    className="text-accent/50 text-4xl"
-                    animate={{
-                      scale: [1, 1.1, 1],
-                      rotate: [0, 5, 0],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      delay: index * 0.5,
-                    }}
-                    >
-                      {post.featured_image ? (
-                        <img
-                          src={post.featured_image}
-                          alt={post.title}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="text-6xl">📝</div>
-                      )}
-                    </motion.div>
+                {/* Blog Image */}
+                <div className="relative h-48 bg-gradient-to-br from-primary/10 to-accent/10 overflow-hidden">
+                  {post.featured_image ? (
+                    <img
+                      src={post.featured_image}
+                      alt={post.title}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <motion.div
+                        className="text-accent/50 text-6xl"
+                        animate={{
+                          scale: [1, 1.1, 1],
+                          rotate: [0, 5, 0],
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          delay: index * 0.5,
+                        }}
+                      >
+                        📝
+                      </motion.div>
+                    </div>
+                  )}
 
                   {/* Floating particles */}
                   {[...Array(3)].map((_, i) => (

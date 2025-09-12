@@ -118,6 +118,9 @@ const BlogDetail = () => {
               src={blog.featured_image}
               alt={blog.title}
               className="w-full h-64 md:h-96 object-cover"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
             />
           </motion.div>
         )}
