@@ -29,7 +29,7 @@ const Testimonials = () => {
       content:
         "Rudraksh did a great job building my personal site. It's clean, professional, and truly reflects my brand. He’s efficient, thoughtful, and easy to collaborate with.",
       rating: 4,
-      avatar: "#",
+      avatar: "/Testimonial3.png",
     },
   ];
 

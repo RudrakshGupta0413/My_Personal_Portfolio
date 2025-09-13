@@ -189,10 +189,10 @@ const FreelanceUpdates = () => {
           </motion.div>
           
           <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-6">
-            Freelance Journey
+            Binary Bites
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Stay updated with my latest projects, achievements, and milestones
+            Quick updates on my technical progress, projects, and new discoveries in the world of coding and freelancing.
           </p>
         </motion.div>
 
