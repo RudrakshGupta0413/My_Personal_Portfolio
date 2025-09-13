@@ -141,18 +141,6 @@ const FreelanceUpdates = () => {
     return `${Math.floor(diffInMinutes / 1440)}d ago`;
   };
 
-  // Fill remaining slots with placeholder boxes if less than 9 updates
-  const displayUpdates = [...updates];
-  while (displayUpdates.length < 9) {
-    displayUpdates.push({
-      id: `placeholder-${displayUpdates.length}`,
-      title: "Coming Soon",
-      description: "More updates coming soon...",
-      type: 'announcement' as const,
-      priority: 0,
-      created_at: new Date().toISOString(),
-    });
-  }
 
   return (
     <section id="freelance-updates" ref={ref} className="py-20 relative overflow-hidden">
@@ -215,9 +203,8 @@ const FreelanceUpdates = () => {
           animate={isInView ? "visible" : "hidden"}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto"
         >
-          {displayUpdates.slice(0, 9).map((update, index) => {
+          {updates.map((update, index) => {
             const Icon = typeIcons[update.type];
-            const isPlaceholder = update.id.startsWith('placeholder');
             
             return (
               <motion.div
@@ -230,9 +217,7 @@ const FreelanceUpdates = () => {
                   index === 1 || index === 7 ? 'md:row-span-1' : ''
                 }`}
               >
-                <Card className={`h-full bg-card/60 backdrop-blur-sm border border-border/50 hover:border-primary/40 transition-all duration-500 group ${
-                  isPlaceholder ? 'opacity-50' : 'hover:shadow-xl hover:shadow-primary/5'
-                }`}>
+                <Card className="h-full bg-card/60 backdrop-blur-sm border border-border/50 hover:border-primary/40 transition-all duration-500 group hover:shadow-xl hover:shadow-primary/5">
                   <CardContent className="p-4 h-full flex flex-col">
                     {/* Header with Icon and Badge */}
                     <div className="flex items-center justify-between mb-3">
