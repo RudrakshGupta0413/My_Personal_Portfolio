@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { Briefcase, Award, Target, Megaphone } from "lucide-react";
+import { Briefcase, Award, Target, Megaphone, Heart, MessageCircle, Repeat2, Share, User } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
@@ -107,14 +107,38 @@ const FreelanceUpdates = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
       },
     },
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+  const tweetVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: 50,
+      scale: 0.9 
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring" as const,
+        damping: 20,
+        stiffness: 100
+      }
+    },
+  };
+
+  const formatTimeAgo = (dateString: string) => {
+    const now = new Date();
+    const date = new Date(dateString);
+    const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
+    
+    if (diffInMinutes < 60) return `${diffInMinutes}m`;
+    if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h`;
+    return `${Math.floor(diffInMinutes / 1440)}d`;
   };
 
   return (
@@ -175,34 +199,116 @@ const FreelanceUpdates = () => {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className="max-w-4xl mx-auto space-y-6"
         >
-          {updates.map((update) => {
+          {updates.map((update, index) => {
             const Icon = typeIcons[update.type];
             return (
-              <motion.div key={update.id} variants={cardVariants}>
-                <Card className="glass-effect border-white/20 hover:border-white/30 transition-all duration-300 h-full group">
-                  <CardContent className="p-6 space-y-4">
-                    <div className="flex items-start justify-between">
-                      <div className={`p-3 rounded-lg ${typeColors[update.type]} group-hover:scale-110 transition-transform duration-300`}>
-                        <Icon className="h-5 w-5" />
+              <motion.div 
+                key={update.id} 
+                variants={tweetVariants}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Card className="bg-card/50 backdrop-blur-md border border-border/50 hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 group">
+                  <CardContent className="p-6">
+                    {/* Tweet Header */}
+                    <div className="flex items-start space-x-4 mb-4">
+                      <motion.div 
+                        className="flex-shrink-0"
+                        whileHover={{ rotate: 5 }}
+                      >
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center border-2 border-primary/30">
+                          <Icon className="h-6 w-6 text-primary" />
+                        </div>
+                      </motion.div>
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center space-x-2">
+                          <h3 className="font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                            My Portfolio
+                          </h3>
+                          <motion.div
+                            whileHover={{ scale: 1.1 }}
+                            className="text-primary"
+                          >
+                            <Badge variant="secondary" className={`text-xs capitalize ${typeColors[update.type]} border-0`}>
+                              {update.type}
+                            </Badge>
+                          </motion.div>
+                        </div>
+                        <p className="text-muted-foreground text-sm">
+                          @portfolio • {formatTimeAgo(update.created_at)}
+                        </p>
                       </div>
-                      <Badge variant="outline" className="text-xs capitalize">
-                        {update.type}
-                      </Badge>
                     </div>
-                    
-                    <div>
-                      <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors duration-300">
+
+                    {/* Tweet Content */}
+                    <motion.div 
+                      className="mb-4"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <h4 className="font-semibold text-lg mb-2 text-foreground group-hover:text-primary/90 transition-colors duration-300">
                         {update.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                      </h4>
+                      <p className="text-muted-foreground leading-relaxed">
                         {update.description}
                       </p>
-                    </div>
-                    
-                    <div className="text-xs text-muted-foreground">
-                      {new Date(update.created_at).toLocaleDateString()}
+                    </motion.div>
+
+                    {/* Tweet Actions */}
+                    <div className="flex items-center justify-between pt-3 border-t border-border/30">
+                      <div className="flex items-center space-x-6">
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="flex items-center space-x-2 text-muted-foreground hover:text-blue-400 transition-colors duration-200"
+                        >
+                          <MessageCircle className="h-4 w-4" />
+                          <span className="text-sm">{Math.floor(Math.random() * 10) + 1}</span>
+                        </motion.button>
+                        
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="flex items-center space-x-2 text-muted-foreground hover:text-green-400 transition-colors duration-200"
+                        >
+                          <Repeat2 className="h-4 w-4" />
+                          <span className="text-sm">{Math.floor(Math.random() * 5) + 1}</span>
+                        </motion.button>
+                        
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="flex items-center space-x-2 text-muted-foreground hover:text-red-400 transition-colors duration-200"
+                        >
+                          <Heart className="h-4 w-4" />
+                          <span className="text-sm">{Math.floor(Math.random() * 20) + 5}</span>
+                        </motion.button>
+                        
+                        <motion.button
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                          className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors duration-200"
+                        >
+                          <Share className="h-4 w-4" />
+                        </motion.button>
+                      </div>
+                      
+                      <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 + 0.3 }}
+                        className="text-xs text-muted-foreground"
+                      >
+                        {new Date(update.created_at).toLocaleDateString('en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric'
+                        })}
+                      </motion.div>
                     </div>
                   </CardContent>
                 </Card>
