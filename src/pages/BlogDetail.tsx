@@ -5,6 +5,7 @@ import { Calendar, Clock, ArrowLeft, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
+import { BlogContent } from "@/components/ui/blog-content";
 
 interface BlogPost {
   id: string;
@@ -179,12 +180,8 @@ const BlogDetail = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="prose prose-lg max-w-none dark:prose-invert prose-headings:gradient-text prose-a:text-accent prose-a:no-underline hover:prose-a:underline"
         >
-          <div
-            dangerouslySetInnerHTML={{ __html: blog.content }}
-            className="leading-relaxed text-foreground"
-          />
+          <BlogContent content={blog.content} />
         </motion.article>
 
         {/* Back to Top Button */}

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { RichTextEditor } from "@/components/ui/rich-text-editor";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -62,6 +63,13 @@ const BlogEditor = ({ blog, onClose }: BlogEditorProps) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleContentChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      content: value,
     }));
   };
 
@@ -213,14 +221,11 @@ const BlogEditor = ({ blog, onClose }: BlogEditorProps) => {
 
               <div>
                 <Label htmlFor="content">Content *</Label>
-                <Textarea
-                  id="content"
-                  name="content"
+                <RichTextEditor
                   value={formData.content}
-                  onChange={handleInputChange}
+                  onChange={handleContentChange}
                   placeholder="Write your blog content here..."
-                  rows={20}
-                  required
+                  className="mt-2"
                 />
               </div>
             </CardContent>
