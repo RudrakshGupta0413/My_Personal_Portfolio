@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { Briefcase, Award, Target, Megaphone } from "lucide-react";
+import { Briefcase, Award, Target, Megaphone, Smile, Code, Shuffle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
@@ -10,7 +10,7 @@ interface FreelanceUpdate {
   id: string;
   title: string;
   description: string;
-  type: 'project' | 'achievement' | 'milestone' | 'announcement';
+  type: 'project' | 'achievement' | 'milestone' | 'announcement' | 'vibe_check' | 'snippet' | 'random';
   priority: number;
   created_at: string;
 }
@@ -20,6 +20,9 @@ const typeIcons = {
   achievement: Award,
   milestone: Target,
   announcement: Megaphone,
+  vibe_check: Smile,
+  snippet: Code,
+  random: Shuffle,
 };
 
 const typeColors = {
@@ -27,6 +30,9 @@ const typeColors = {
   achievement: "bg-green-500/20 text-green-300",
   milestone: "bg-purple-500/20 text-purple-300",
   announcement: "bg-orange-500/20 text-orange-300",
+  vibe_check: "bg-pink-500/20 text-pink-300",
+  snippet: "bg-cyan-500/20 text-cyan-300",
+  random: "bg-yellow-500/20 text-yellow-300",
 };
 
 const FreelanceUpdates = () => {
