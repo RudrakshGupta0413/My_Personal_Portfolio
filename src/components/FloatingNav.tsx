@@ -74,7 +74,7 @@ const FloatingNav = () => {
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: 1 }}
-      className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 hidden lg:flex flex-row gap-4"
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden lg:flex justify-center"
     >
       {/* Navigation */}
       <div className="glass-effect glow-effect rounded-full p-2 flex space-x-2">
