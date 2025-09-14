@@ -220,7 +220,7 @@ const FreelanceUpdatesManager = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-2xl font-bold">Freelance Updates</h2>
+          <h2 className="text-2xl font-bold">Tech Updates</h2>
           <p className="text-muted-foreground">Manage your freelance work updates and announcements</p>
         </div>
         <Dialog open={showDialog} onOpenChange={setShowDialog}>

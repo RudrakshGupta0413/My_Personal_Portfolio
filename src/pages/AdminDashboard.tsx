@@ -42,7 +42,7 @@ const AdminDashboard = () => {
           <Tabs defaultValue="blogs" className="space-y-6">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="blogs">Blog Posts</TabsTrigger>
-              <TabsTrigger value="updates">Freelance Updates</TabsTrigger>
+              <TabsTrigger value="updates">Tech Updates</TabsTrigger>
             </TabsList>
             
             <TabsContent value="blogs" className="space-y-6">
