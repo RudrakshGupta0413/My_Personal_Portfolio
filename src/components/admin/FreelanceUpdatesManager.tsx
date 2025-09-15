@@ -163,10 +163,10 @@ const FreelanceUpdatesManager = () => {
       setShowDialog(false);
       resetForm();
       fetchUpdates();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error",
-        description: error.message || "Failed to save update",
+        description: (error as Error).message || "Failed to save update",
         variant: "destructive",
       });
     }
@@ -188,10 +188,10 @@ const FreelanceUpdatesManager = () => {
         description: "Update deleted successfully",
       });
       fetchUpdates();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error",
-        description: error.message || "Failed to delete update",
+        description: (error as Error).message || "Failed to delete update",
         variant: "destructive",
       });
     }
@@ -213,10 +213,10 @@ const FreelanceUpdatesManager = () => {
         description: `Update ${newStatus === 'active' ? 'activated' : 'deactivated'} successfully`,
       });
       fetchUpdates();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error",
-        description: error.message || "Failed to update status",
+        description: (error as Error).message || "Failed to update status",
         variant: "destructive",
       });
     }

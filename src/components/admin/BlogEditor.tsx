@@ -146,10 +146,10 @@ const BlogEditor = ({ blog, onClose }: BlogEditorProps) => {
       }
 
       onClose();
-    } catch (error: any) {
+    } catch (error: unknown) {
       toast({
         title: "Error",
-        description: error.message || "Failed to save blog post",
+        description: (error as Error).message || "Failed to save blog post",
         variant: "destructive",
       });
     } finally {

@@ -7,11 +7,25 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { supabase } from "@/integrations/supabase/client";
 
+interface Blog {
+  id: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  featured_image: string | null;
+  tags: string[];
+  status: "draft" | "published";
+  read_time: number;
+  created_at: string;
+  updated_at: string;
+  published_at: string | null;
+}
+
 const Blogs = () => {
   const ref = useRef(null);
   const navigate = useNavigate();
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [blogPosts, setBlogPosts] = useState<any[]>([]);
+  const [blogPosts, setBlogPosts] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,35 +43,56 @@ const Blogs = () => {
           // Fallback to static data
           setBlogPosts([
             {
-              id: 1,
-              title: "From React.js to Next.js: Elevate Your Web Development Game",
-              excerpt: "Discover how transitioning from React.js to Next.js can supercharge your web development workflow with features like server-side rendering, API routes, and built-in performance optimization.",
+              id: "1",
+              title:
+                "From React.js to Next.js: Elevate Your Web Development Game",
+              excerpt:
+                "Discover how transitioning from React.js to Next.js can supercharge your web development workflow with features like server-side rendering, API routes, and built-in performance optimization.",
               published_at: "2024-06-04",
               read_time: 6,
-              tags: ["React", "Next.js", "Web Development", "Full Stack Development"],
+              tags: [
+                "React",
+                "Next.js",
+                "Web Development",
+                "Full Stack Development",
+              ],
               featured_image: "/blog1.png",
+              content: "", // Add all required fields
+              status: "published",
+              created_at: "2024-06-04T00:00:00Z",
+              updated_at: "2024-06-04T00:00:00Z",
             },
             {
-              id: 2,
+              id: "2",
               title: "How to start with React.js: A Simple Guide for Beginners",
-              excerpt: "A beginner-friendly guide to help you get started with React.js. Learn the core concepts, project setup, and how to build your first interactive UI components step by step.",
+              excerpt:
+                "A beginner-friendly guide to help you get started with React.js. Learn the core concepts, project setup, and how to build your first interactive UI components step by step.",
               published_at: "2024-06-07",
               read_time: 5,
               tags: ["React", "Web Development", "Javascript"],
               featured_image: "/blog2.png",
+              content: "",
+              status: "published",
+              created_at: "2024-06-07T00:00:00Z",
+              updated_at: "2024-06-07T00:00:00Z",
             },
             {
-              id: 3,
+              id: "3",
               title: "Discover HTMX: Revolutionizing Modern Web Development",
-              excerpt: "Explore how HTMX is transforming modern web development by enabling dynamic, interactive user experiences using standard HTML—without relying heavily on JavaScript frameworks.",
+              excerpt:
+                "Explore how HTMX is transforming modern web development by enabling dynamic, interactive user experiences using standard HTML—without relying heavily on JavaScript frameworks.",
               published_at: "2024-06-22",
               read_time: 6,
               tags: ["HTMX", "HTML5", "Frontend", "Web Development"],
               featured_image: "/blog3.png",
+              content: "",
+              status: "published",
+              created_at: "2024-06-22T00:00:00Z",
+              updated_at: "2024-06-22T00:00:00Z",
             },
           ]);
         } else {
-          setBlogPosts(data || []);
+          setBlogPosts(data as Blog[] || []);
         }
       } catch (error) {
         console.error("Error:", error);
@@ -208,7 +243,10 @@ const Blogs = () => {
         {loading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {[1, 2, 3].map((i) => (
-              <Card key={i} className="glass-effect border-white/20 animate-pulse">
+              <Card
+                key={i}
+                className="glass-effect border-white/20 animate-pulse"
+              >
                 <div className="h-48 bg-muted rounded-t-2xl"></div>
                 <CardContent className="p-6 space-y-4">
                   <div className="flex justify-between">
@@ -230,7 +268,9 @@ const Blogs = () => {
           </div>
         ) : blogPosts.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">No blog posts available yet.</p>
+            <p className="text-muted-foreground">
+              No blog posts available yet.
+            </p>
           </div>
         ) : (
           <motion.div
@@ -240,162 +280,170 @@ const Blogs = () => {
             animate={isInView ? "visible" : "hidden"}
           >
             {blogPosts.map((post, index) => (
-            <motion.article
-              key={post.id}
-              variants={cardVariants}
-              transition={{
-                duration: 0.6,
-                ease: "easeOut",
-              }}
-              whileHover={{
-                y: -10,
-                scale: 1.02,
-                rotateX: 5,
-                transition: { duration: 0.3 },
-              }}
-              className="group relative cursor-pointer"
-              style={{ perspective: "1000px" }}
-            >
-              <motion.div
-                className="relative glass-effect rounded-2xl border border-border/30 overflow-hidden h-full"
-                whileHover={{
-                  boxShadow: "0 20px 40px hsl(var(--accent) / 0.1)",
-                  borderColor: "hsl(var(--accent) / 0.3)",
+              <motion.article
+                key={post.id}
+                variants={cardVariants}
+                transition={{
+                  duration: 0.6,
+                  ease: "easeOut",
                 }}
-                onClick={() => navigate(`/blog/${post.id}`)}
+                whileHover={{
+                  y: -10,
+                  scale: 1.02,
+                  rotateX: 5,
+                  transition: { duration: 0.3 },
+                }}
+                className="group relative cursor-pointer"
+                style={{ perspective: "1000px" }}
               >
-                {/* Background gradient */}
-                <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                {/* Shimmer effect */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
-                  transition={{ duration: 0.8 }}
-                />
+                  className="relative glass-effect rounded-2xl border border-border/30 overflow-hidden h-full"
+                  whileHover={{
+                    boxShadow: "0 20px 40px hsl(var(--accent) / 0.1)",
+                    borderColor: "hsl(var(--accent) / 0.3)",
+                  }}
+                  onClick={() => navigate(`/blog/${post.id}`)}
+                >
+                  {/* Background gradient */}
+                  <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                {/* Blog Image */}
-                <div className="relative h-48 bg-gradient-to-br from-primary/10 to-accent/10 overflow-hidden">
-                  {post.featured_image ? (
-                    <img
-                      src={post.featured_image}
-                      alt={post.title}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
+                  {/* Shimmer effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -skew-x-12"
+                    initial={{ x: "-100%" }}
+                    whileHover={{ x: "100%" }}
+                    transition={{ duration: 0.8 }}
+                  />
+
+                  {/* Blog Image */}
+                  <div className="relative h-48 bg-gradient-to-br from-primary/10 to-accent/10 overflow-hidden">
+                    {post.featured_image ? (
+                      <img
+                        src={post.featured_image}
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <motion.div
+                          className="text-accent/50 text-6xl"
+                          animate={{
+                            scale: [1, 1.1, 1],
+                            rotate: [0, 5, 0],
+                          }}
+                          transition={{
+                            duration: 4,
+                            repeat: Infinity,
+                            delay: index * 0.5,
+                          }}
+                        >
+                          📝
+                        </motion.div>
+                      </div>
+                    )}
+
+                    {/* Floating particles */}
+                    {[...Array(3)].map((_, i) => (
                       <motion.div
-                        className="text-accent/50 text-6xl"
+                        key={i}
+                        className="absolute w-1 h-1 bg-accent/30 rounded-full"
+                        style={{
+                          left: `${30 + i * 20}%`,
+                          top: `${40 + i * 10}%`,
+                        }}
                         animate={{
-                          scale: [1, 1.1, 1],
-                          rotate: [0, 5, 0],
+                          y: [0, -20, 0],
+                          opacity: [0.3, 1, 0.3],
                         }}
                         transition={{
-                          duration: 4,
+                          duration: 2 + i,
                           repeat: Infinity,
-                          delay: index * 0.5,
+                          delay: index * 0.2 + i * 0.3,
                         }}
-                      >
-                        📝
-                      </motion.div>
-                    </div>
-                  )}
-
-                  {/* Floating particles */}
-                  {[...Array(3)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-1 h-1 bg-accent/30 rounded-full"
-                      style={{
-                        left: `${30 + i * 20}%`,
-                        top: `${40 + i * 10}%`,
-                      }}
-                      animate={{
-                        y: [0, -20, 0],
-                        opacity: [0.3, 1, 0.3],
-                      }}
-                      transition={{
-                        duration: 2 + i,
-                        repeat: Infinity,
-                        delay: index * 0.2 + i * 0.3,
-                      }}
-                    />
-                  ))}
-                </div>
-
-                {/* Content */}
-                <div className="p-6 relative z-10">
-                  {/* Meta Info */}
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      <span>{new Date(post.published_at || post.created_at).toLocaleDateString()}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" />
-                      <span>{post.read_time} min read</span>
-                    </div>
+                      />
+                    ))}
                   </div>
 
-                  {/* Title */}
-                  <motion.h3
-                    className="text-lg font-bold text-foreground mb-3 group-hover:text-accent transition-colors line-clamp-2"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.6 + index * 0.1 }}
-                  >
-                    {post.title}
-                  </motion.h3>
+                  {/* Content */}
+                  <div className="p-6 relative z-10">
+                    {/* Meta Info */}
+                    <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3" />
+                        <span>
+                          {new Date(
+                            post.published_at || post.created_at
+                          ).toLocaleDateString()}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        <span>{post.read_time} min read</span>
+                      </div>
+                    </div>
 
-                  {/* Excerpt */}
-                  <motion.p
-                    className="text-sm text-muted-foreground mb-4 line-clamp-3"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 0.8 + index * 0.1 }}
-                  >
-                    {post.excerpt}
-                  </motion.p>
-
-                  {/* Tags */}
-                  <motion.div
-                    className="flex flex-wrap gap-2 mb-4"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{ delay: 1 + index * 0.1 }}
-                  >
-                    {post.tags?.map((tag: string, tagIndex: number) => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
-                  </motion.div>
-
-                  {/* Read More Button */}
-                  <motion.div
-                    className="flex items-center gap-2 text-accent text-sm font-medium group-hover:text-accent-foreground transition-colors cursor-pointer"
-                    whileHover={{ x: 5 }}
-                  >
-                    <span>Read More</span>
-                    <motion.div
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
+                    {/* Title */}
+                    <motion.h3
+                      className="text-lg font-bold text-foreground mb-3 group-hover:text-accent transition-colors line-clamp-2"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ delay: 0.6 + index * 0.1 }}
                     >
-                      <ArrowRight className="h-4 w-4" />
-                    </motion.div>
-                  </motion.div>
-                </div>
+                      {post.title}
+                    </motion.h3>
 
-                {/* External link indicator */}
-                <motion.div
-                  className="absolute top-4 right-4 p-2 rounded-full bg-secondary/50 text-accent opacity-0 group-hover:opacity-100 transition-opacity"
-                  whileHover={{ scale: 1.1, rotate: 15 }}
-                >
-                  <ExternalLink className="h-4 w-4" />
+                    {/* Excerpt */}
+                    <motion.p
+                      className="text-sm text-muted-foreground mb-4 line-clamp-3"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ delay: 0.8 + index * 0.1 }}
+                    >
+                      {post.excerpt}
+                    </motion.p>
+
+                    {/* Tags */}
+                    <motion.div
+                      className="flex flex-wrap gap-2 mb-4"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ delay: 1 + index * 0.1 }}
+                    >
+                      {post.tags?.map((tag: string, tagIndex: number) => (
+                        <Badge
+                          key={tag}
+                          variant="secondary"
+                          className="text-xs"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </motion.div>
+
+                    {/* Read More Button */}
+                    <motion.div
+                      className="flex items-center gap-2 text-accent text-sm font-medium group-hover:text-accent-foreground transition-colors cursor-pointer"
+                      whileHover={{ x: 5 }}
+                    >
+                      <span>Read More</span>
+                      <motion.div
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        <ArrowRight className="h-4 w-4" />
+                      </motion.div>
+                    </motion.div>
+                  </div>
+
+                  {/* External link indicator */}
+                  <motion.div
+                    className="absolute top-4 right-4 p-2 rounded-full bg-secondary/50 text-accent opacity-0 group-hover:opacity-100 transition-opacity"
+                    whileHover={{ scale: 1.1, rotate: 15 }}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            </motion.article>
+              </motion.article>
             ))}
           </motion.div>
         )}

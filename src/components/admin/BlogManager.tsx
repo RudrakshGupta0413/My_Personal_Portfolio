@@ -85,7 +85,13 @@ const BlogManager = () => {
 
   const handleStatusToggle = async (blog: Blog) => {
     const newStatus = blog.status === 'published' ? 'draft' : 'published';
-    const updates: any = { status: newStatus };
+
+    type BlogUpdate = {
+      status: 'draft' | 'published';
+      published_at?: string | null;
+    };
+
+    const updates: BlogUpdate = { status: newStatus };
     
     if (newStatus === 'published' && !blog.published_at) {
       updates.published_at = new Date().toISOString();
