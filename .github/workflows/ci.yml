@@ -1,0 +1,38 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Build project
+        run: npm run build
+      
+      # Since you are using Vercel, it automatically handles deployment for you.
+      # However, if you were to deploy manually to a different service like AWS S3,
+      # you would add a step here to upload the 'dist' folder.
+      # For Vercel, the integration is often configured via the Vercel UI.
+      - name: Deploy to Vercel
+        run: |
+          echo "Vercel deployment is handled automatically by the Vercel Git integration."
+          echo "Vercel will trigger a new build and deployment for this commit."
