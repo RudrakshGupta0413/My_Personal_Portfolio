@@ -1,24 +1,62 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Plus, Edit, Trash2, Briefcase, Award, Target, Megaphone, Smile, Code, Shuffle } from "lucide-react";
+import {
+  Plus,
+  Edit,
+  Trash2,
+  Briefcase,
+  Award,
+  Target,
+  Megaphone,
+  Smile,
+  Code,
+  Shuffle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useCallback } from "react";
 
 interface FreelanceUpdate {
   id: string;
   title: string;
   description: string;
-  type: 'project' | 'achievement' | 'milestone' | 'announcement' | 'vibe_check' | 'snippet' | 'random';
-  status: 'active' | 'inactive';
+  type:
+    | "project"
+    | "achievement"
+    | "milestone"
+    | "announcement"
+    | "vibe_check"
+    | "snippet"
+    | "random";
+  status: "active" | "inactive";
   priority: number;
   created_at: string;
   updated_at: string;
@@ -48,18 +86,20 @@ const FreelanceUpdatesManager = () => {
   const [updates, setUpdates] = useState<FreelanceUpdate[]>([]);
   const [loading, setLoading] = useState(true);
   const [showDialog, setShowDialog] = useState(false);
-  const [editingUpdate, setEditingUpdate] = useState<FreelanceUpdate | null>(null);
+  const [editingUpdate, setEditingUpdate] = useState<FreelanceUpdate | null>(
+    null
+  );
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    type: "project" as FreelanceUpdate['type'],
-    status: "active" as FreelanceUpdate['status'],
+    type: "project" as FreelanceUpdate["type"],
+    status: "active" as FreelanceUpdate["status"],
     priority: 1,
   });
   const { profile } = useAuth();
   const { toast } = useToast();
 
-  const fetchUpdates = async () => {
+  const fetchUpdates = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from("freelance_updates")
@@ -74,18 +114,18 @@ const FreelanceUpdatesManager = () => {
           variant: "destructive",
         });
       } else {
-        setUpdates(data as FreelanceUpdate[] || []);
+        setUpdates((data as FreelanceUpdate[]) || []);
       }
     } catch (error) {
       console.error("Error fetching updates:", error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [toast]);
 
   useEffect(() => {
     fetchUpdates();
-  }, []);
+  }, [fetchUpdates]);
 
   const resetForm = () => {
     setFormData({
@@ -198,7 +238,7 @@ const FreelanceUpdatesManager = () => {
   };
 
   const handleStatusToggle = async (update: FreelanceUpdate) => {
-    const newStatus = update.status === 'active' ? 'inactive' : 'active';
+    const newStatus = update.status === "active" ? "inactive" : "active";
 
     try {
       const { error } = await supabase
@@ -210,7 +250,9 @@ const FreelanceUpdatesManager = () => {
 
       toast({
         title: "Success",
-        description: `Update ${newStatus === 'active' ? 'activated' : 'deactivated'} successfully`,
+        description: `Update ${
+          newStatus === "active" ? "activated" : "deactivated"
+        } successfully`,
       });
       fetchUpdates();
     } catch (error: unknown) {
@@ -227,7 +269,9 @@ const FreelanceUpdatesManager = () => {
       <div className="flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold">Tech Updates</h2>
-          <p className="text-muted-foreground">Manage your freelance work updates and announcements</p>
+          <p className="text-muted-foreground">
+            Manage your freelance work updates and announcements
+          </p>
         </div>
         <Dialog open={showDialog} onOpenChange={setShowDialog}>
           <DialogTrigger asChild>
@@ -251,7 +295,9 @@ const FreelanceUpdatesManager = () => {
                 <Input
                   id="title"
                   value={formData.title}
-                  onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({ ...prev, title: e.target.value }))
+                  }
                   placeholder="Update title"
                 />
               </div>
@@ -261,7 +307,12 @@ const FreelanceUpdatesManager = () => {
                 <Textarea
                   id="description"
                   value={formData.description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  onChange={(e) =>
+                    setFormData((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }))
+                  }
                   placeholder="Describe your update"
                   rows={3}
                 />
@@ -270,10 +321,10 @@ const FreelanceUpdatesManager = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="type">Type</Label>
-                  <Select 
-                    value={formData.type} 
-                    onValueChange={(value: FreelanceUpdate['type']) => 
-                      setFormData(prev => ({ ...prev, type: value }))
+                  <Select
+                    value={formData.type}
+                    onValueChange={(value: FreelanceUpdate["type"]) =>
+                      setFormData((prev) => ({ ...prev, type: value }))
                     }
                   >
                     <SelectTrigger>
@@ -299,17 +350,22 @@ const FreelanceUpdatesManager = () => {
                     min="1"
                     max="10"
                     value={formData.priority}
-                    onChange={(e) => setFormData(prev => ({ ...prev, priority: parseInt(e.target.value) || 1 }))}
+                    onChange={(e) =>
+                      setFormData((prev) => ({
+                        ...prev,
+                        priority: parseInt(e.target.value) || 1,
+                      }))
+                    }
                   />
                 </div>
               </div>
 
               <div>
                 <Label htmlFor="status">Status</Label>
-                <Select 
-                  value={formData.status} 
-                  onValueChange={(value: FreelanceUpdate['status']) => 
-                    setFormData(prev => ({ ...prev, status: value }))
+                <Select
+                  value={formData.status}
+                  onValueChange={(value: FreelanceUpdate["status"]) =>
+                    setFormData((prev) => ({ ...prev, status: value }))
                   }
                 >
                   <SelectTrigger>
@@ -358,7 +414,9 @@ const FreelanceUpdatesManager = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold">No updates yet</h3>
-                <p className="text-muted-foreground">Create your first freelance update</p>
+                <p className="text-muted-foreground">
+                  Create your first freelance update
+                </p>
               </div>
               <Button onClick={handleCreate}>
                 <Plus className="h-4 w-4 mr-2" />
@@ -381,12 +439,25 @@ const FreelanceUpdatesManager = () => {
                   <CardHeader>
                     <div className="flex justify-between items-start">
                       <div className="flex items-center space-x-2">
-                        <div className={`p-2 rounded-lg ${typeColors[update.type]}`}>
+                        <div
+                          className={`p-2 rounded-lg ${
+                            typeColors[update.type]
+                          }`}
+                        >
                           <Icon className="h-4 w-4" />
                         </div>
                         <div className="flex-1">
-                          <CardTitle className="text-sm font-medium">{update.title}</CardTitle>
-                          <Badge variant={update.status === 'active' ? 'default' : 'secondary'} className="text-xs">
+                          <CardTitle className="text-sm font-medium">
+                            {update.title}
+                          </CardTitle>
+                          <Badge
+                            variant={
+                              update.status === "active"
+                                ? "default"
+                                : "secondary"
+                            }
+                            className="text-xs"
+                          >
                             {update.status}
                           </Badge>
                         </div>
@@ -400,9 +471,13 @@ const FreelanceUpdatesManager = () => {
                     <CardDescription className="line-clamp-3">
                       {update.description}
                     </CardDescription>
-                    
+
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={() => handleEdit(update)}>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleEdit(update)}
+                      >
                         <Edit className="h-4 w-4" />
                       </Button>
                       <Button
@@ -410,7 +485,7 @@ const FreelanceUpdatesManager = () => {
                         size="sm"
                         onClick={() => handleStatusToggle(update)}
                       >
-                        {update.status === 'active' ? 'Deactivate' : 'Activate'}
+                        {update.status === "active" ? "Deactivate" : "Activate"}
                       </Button>
                       <Button
                         variant="outline"

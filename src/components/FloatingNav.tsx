@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import {
   Home,
@@ -16,14 +16,17 @@ import { SiHashnode } from "react-icons/si";
 const FloatingNav = () => {
   const [activeSection, setActiveSection] = useState("home");
 
-  const navItems = [
-    { id: "home", icon: Home, label: "Home" },
-    { id: "skills", icon: Code, label: "Skills" },
-    { id: "projects", icon: Briefcase, label: "Projects" },
-    { id: "blogs", icon: PenTool, label: "Blogs" },
-    // { id: "testimonials", icon: MessageSquare, label: "Testimonials" },
-    { id: "contact", icon: User, label: "Contact" },
-  ];
+  const navItems = useMemo(
+    () => [
+      { id: "home", icon: Home, label: "Home" },
+      { id: "skills", icon: Code, label: "Skills" },
+      { id: "projects", icon: Briefcase, label: "Projects" },
+      { id: "blogs", icon: PenTool, label: "Blogs" },
+      // { id: "testimonials", icon: MessageSquare, label: "Testimonials" },
+      { id: "contact", icon: User, label: "Contact" },
+    ],
+    []
+  );
 
   const socialItems = [
     {
@@ -60,7 +63,7 @@ const FloatingNav = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [navItems]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);

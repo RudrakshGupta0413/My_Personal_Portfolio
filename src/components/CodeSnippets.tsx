@@ -21,7 +21,7 @@ const CodeSnippets = () => {
       setCurrentSnippet((prev) => (prev + 1) % snippets.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  }, [snippets.length]);
 
   return (
     <div className="absolute top-20 lg:right-10 hidden lg:block">

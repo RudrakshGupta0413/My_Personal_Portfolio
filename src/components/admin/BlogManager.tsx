@@ -2,11 +2,18 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Plus, Edit, Trash2, Eye, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import BlogEditor from "./BlogEditor";
+import { useCallback } from "react";
 
 interface Blog {
   id: string;
@@ -15,7 +22,7 @@ interface Blog {
   content: string;
   featured_image: string | null;
   tags: string[];
-  status: 'draft' | 'published';
+  status: "draft" | "published";
   read_time: number;
   created_at: string;
   updated_at: string;
@@ -29,7 +36,7 @@ const BlogManager = () => {
   const [editingBlog, setEditingBlog] = useState<Blog | null>(null);
   const { toast } = useToast();
 
-  const fetchBlogs = async () => {
+  const fetchBlogs = useCallback(async () => {
     try {
       const { data, error } = await supabase
         .from("blogs")
@@ -43,27 +50,24 @@ const BlogManager = () => {
           variant: "destructive",
         });
       } else {
-        setBlogs(data as Blog[] || []);
+        setBlogs((data as Blog[]) || []);
       }
     } catch (error) {
       console.error("Error fetching blogs:", error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [toast]);
 
   useEffect(() => {
     fetchBlogs();
-  }, []);
+  }, [fetchBlogs]);
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this blog post?")) return;
 
     try {
-      const { error } = await supabase
-        .from("blogs")
-        .delete()
-        .eq("id", id);
+      const { error } = await supabase.from("blogs").delete().eq("id", id);
 
       if (error) {
         toast({
@@ -84,16 +88,16 @@ const BlogManager = () => {
   };
 
   const handleStatusToggle = async (blog: Blog) => {
-    const newStatus = blog.status === 'published' ? 'draft' : 'published';
+    const newStatus = blog.status === "published" ? "draft" : "published";
 
     type BlogUpdate = {
-      status: 'draft' | 'published';
+      status: "draft" | "published";
       published_at?: string | null;
     };
 
     const updates: BlogUpdate = { status: newStatus };
-    
-    if (newStatus === 'published' && !blog.published_at) {
+
+    if (newStatus === "published" && !blog.published_at) {
       updates.published_at = new Date().toISOString();
     }
 
@@ -112,7 +116,9 @@ const BlogManager = () => {
       } else {
         toast({
           title: "Success",
-          description: `Blog ${newStatus === 'published' ? 'published' : 'unpublished'} successfully`,
+          description: `Blog ${
+            newStatus === "published" ? "published" : "unpublished"
+          } successfully`,
         });
         fetchBlogs();
       }
@@ -138,12 +144,7 @@ const BlogManager = () => {
   };
 
   if (showEditor) {
-    return (
-      <BlogEditor
-        blog={editingBlog}
-        onClose={handleEditorClose}
-      />
-    );
+    return <BlogEditor blog={editingBlog} onClose={handleEditorClose} />;
   }
 
   return (
@@ -185,7 +186,9 @@ const BlogManager = () => {
               </div>
               <div>
                 <h3 className="text-lg font-semibold">No blog posts yet</h3>
-                <p className="text-muted-foreground">Create your first blog post to get started</p>
+                <p className="text-muted-foreground">
+                  Create your first blog post to get started
+                </p>
               </div>
               <Button onClick={handleCreateNew}>
                 <Plus className="h-4 w-4 mr-2" />
@@ -206,10 +209,18 @@ const BlogManager = () => {
                 <CardHeader>
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
-                      <CardTitle className="text-lg line-clamp-2">{blog.title}</CardTitle>
-                      <CardDescription className="line-clamp-2">{blog.excerpt}</CardDescription>
+                      <CardTitle className="text-lg line-clamp-2">
+                        {blog.title}
+                      </CardTitle>
+                      <CardDescription className="line-clamp-2">
+                        {blog.excerpt}
+                      </CardDescription>
                     </div>
-                    <Badge variant={blog.status === 'published' ? 'default' : 'secondary'}>
+                    <Badge
+                      variant={
+                        blog.status === "published" ? "default" : "secondary"
+                      }
+                    >
                       {blog.status}
                     </Badge>
                   </div>
@@ -219,7 +230,7 @@ const BlogManager = () => {
                     <Calendar className="h-4 w-4 mr-1" />
                     {new Date(blog.created_at).toLocaleDateString()}
                   </div>
-                  
+
                   {blog.tags.length > 0 && (
                     <div className="flex flex-wrap gap-1">
                       {blog.tags.map((tag) => (
@@ -229,9 +240,13 @@ const BlogManager = () => {
                       ))}
                     </div>
                   )}
-                  
+
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" onClick={() => handleEdit(blog)}>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleEdit(blog)}
+                    >
                       <Edit className="h-4 w-4" />
                     </Button>
                     <Button
